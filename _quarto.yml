@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Jennifer Xu"
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: bio.qmd
+        text: About
+      - href: resume.qmd
+        text: Resume
+      - href: blog/index.qmd
+        text: Blog
+
+  page-footer:
+    left: |
+      ![](images/UniversityofPennsylvania_FullLogo_RGB.jpeg){width=100px}
+    center: |
+      © 2026 Jennifer Xu
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: false

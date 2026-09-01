@@ -1,0 +1,42 @@
+---
+title: "About Me"
+---
+
+# Biography
+
+I am a student with a strong interest in applying economics, data science, and quantitative methods to real-world problems. I am currently pursuing a Master of Applied Economics and Data Science at the University of Pennsylvania, where I am developing skills in economic modeling, statistical analysis, and data-driven decision-making.
+
+My professional interests include econometrics, machine learning, data analysis, and business analytics. I enjoy using data to identify patterns, evaluate economic and business questions, and communicate actionable insights.
+
+My technical skills include Python, R, SQL, Git, GitHub, statistical modeling, data visualization, and machine learning. My career goal is to work in a data-focused role where I can combine economic reasoning with analytical tools to support strategic decision-making.
+
+## Education
+
+- Master of Applied Economics and Data Science, University of Pennsylvania — Expected 2027
+- Bachelor of Science in Mathematics, New York University Shanghai — 2026
+
+## Professional Interests
+
+- Econometrics
+- Machine Learning
+- Data Analysis
+- Business Analytics
+- Economic Research
+
+## Technical Skills
+
+- Python
+- R
+- SQL
+- Git and GitHub
+- Statistical Modeling
+- Data Visualization
+- Machine Learning
+
+## Career Goals
+
+I hope to pursue a career in economic consulting, data science, business analytics, or a related field where I can use quantitative methods to solve practical problems and support evidence-based decisions.
+
+## Contact
+
+sijiexu\@sas.upenn.edu

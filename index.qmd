@@ -1,0 +1,30 @@
+---
+title: "Jennifer Xu"
+---
+
+:::::: columns
+::: {.column width="35%"}
+![](images/profile.jpg)
+:::
+
+:::: {.column width="65%"}
+![](images/UniversityofPennsylvania_FullLogo_RGB.jpeg)
+
+# Jennifer Xu
+
+University of Pennsylvania
+
+Welcome to my personal website.
+
+### Quick Links
+
+<div>
+
+  <a href="https://github.com/sijiexu-jennifer"><i class="bi bi-github fs-3"></i></a>
+  <a href="www.linkedin.com/in/sijie-xu-006013273"><i class="bi bi-linkedin fs-3"></i></a>
+  <a href="resume.qmd"><i class="bi bi-file-earmark-person-fill fs-3"></i></a>
+  <a href="sijiexu@sas.upenn.edu"><i class="bi bi-envelope-fill fs-3"></i></a>
+</div>
+:::
+:::::
+

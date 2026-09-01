@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "blog/posts/post1/index.html",
+    "href": "blog/posts/post1/index.html",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "",
+    "text": "Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.\nThis reversal is called Simpson’s paradox. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#a-simple-admissions-example",
+    "href": "blog/posts/post1/index.html#a-simple-admissions-example",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "A Simple Admissions Example",
+    "text": "A Simple Admissions Example\nConsider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.\n\n\n\n\n\n\n\n\n\n\n\n\nDepartment\nWomen admitted\nWomen applicants\nWomen’s rate\nMen admitted\nMen applicants\nMen’s rate\n\n\n\n\nA\n9\n10\n90%\n72\n90\n80%\n\n\nB\n20\n100\n20%\n1\n10\n10%\n\n\n\nWithin Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.\nNow combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.\n\n\n\n\n\nAdmission rates by department and overall"
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#why-does-the-reversal-happen",
+    "href": "blog/posts/post1/index.html#why-does-the-reversal-happen",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "Why Does the Reversal Happen?",
+    "text": "Why Does the Reversal Happen?\nThe key is that the overall rate is a weighted average. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.\nFor women, the overall admission rate is\n\\[\\frac{10}{110}(0.90)+\\frac{100}{110}(0.20)\\approx 0.264.\\]\nFor men, it is\n\\[\\frac{90}{100}(0.80)+\\frac{10}{100}(0.10)=0.73.\\]\nThe arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.\nIn statistical language, department is a lurking variable or confounding variable: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#why-it-matters",
+    "href": "blog/posts/post1/index.html#why-it-matters",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nSimpson’s paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.\nThe lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.\nSimpson’s paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: What has been combined, and what information did that combination hide?"
+  },
+  {
+    "objectID": "bio.html",
+    "href": "bio.html",
+    "title": "About Me",
+    "section": "",
+    "text": "I am a student with a strong interest in applying economics, data science, and quantitative methods to real-world problems. I am currently pursuing a Master of Applied Economics and Data Science at the University of Pennsylvania, where I am developing skills in economic modeling, statistical analysis, and data-driven decision-making.\nMy professional interests include econometrics, machine learning, data analysis, and business analytics. I enjoy using data to identify patterns, evaluate economic and business questions, and communicate actionable insights.\nMy technical skills include Python, R, SQL, Git, GitHub, statistical modeling, data visualization, and machine learning. My career goal is to work in a data-focused role where I can combine economic reasoning with analytical tools to support strategic decision-making.\n\n\n\nMaster of Applied Economics and Data Science, University of Pennsylvania — Expected 2027\nBachelor of Science in Mathematics, New York University Shanghai — 2026\n\n\n\n\n\nEconometrics\nMachine Learning\nData Analysis\nBusiness Analytics\nEconomic Research\n\n\n\n\n\nPython\nR\nSQL\nGit and GitHub\nStatistical Modeling\nData Visualization\nMachine Learning\n\n\n\n\nI hope to pursue a career in economic consulting, data science, business analytics, or a related field where I can use quantitative methods to solve practical problems and support evidence-based decisions.\n\n\n\nsijiexu@sas.upenn.edu"
+  },
+  {
+    "objectID": "bio.html#education",
+    "href": "bio.html#education",
+    "title": "About Me",
+    "section": "",
+    "text": "Master of Applied Economics and Data Science, University of Pennsylvania — Expected 2027\nBachelor of Science in Mathematics, New York University Shanghai — 2026"
+  },
+  {
+    "objectID": "bio.html#professional-interests",
+    "href": "bio.html#professional-interests",
+    "title": "About Me",
+    "section": "",
+    "text": "Econometrics\nMachine Learning\nData Analysis\nBusiness Analytics\nEconomic Research"
+  },
+  {
+    "objectID": "bio.html#technical-skills",
+    "href": "bio.html#technical-skills",
+    "title": "About Me",
+    "section": "",
+    "text": "Python\nR\nSQL\nGit and GitHub\nStatistical Modeling\nData Visualization\nMachine Learning"
+  },
+  {
+    "objectID": "bio.html#career-goals",
+    "href": "bio.html#career-goals",
+    "title": "About Me",
+    "section": "",
+    "text": "I hope to pursue a career in economic consulting, data science, business analytics, or a related field where I can use quantitative methods to solve practical problems and support evidence-based decisions."
+  },
+  {
+    "objectID": "bio.html#contact",
+    "href": "bio.html#contact",
+    "title": "About Me",
+    "section": "",
+    "text": "sijiexu@sas.upenn.edu"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download my resume here: ## Resume PDF"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Jennifer Xu",
+    "section": "",
+    "text": "Jennifer Xu\nUniversity of Pennsylvania\nWelcome to my personal website.\n\nQuick Links"
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Simpson’s Paradox: When the Same Data Tells Opposite Stories\n\n\n\n\n\n\n\n\nAug 31, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+  }
+]

@@ -1,0 +1,73 @@
+---
+title: "Simpson's Paradox: When the Same Data Tells Opposite Stories"
+author: "Jennifer Xu"
+date: "2026-08-31"
+categories: [statistics, economics, data science]
+format: html
+---
+
+Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.
+
+This reversal is called **Simpson's paradox**. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups.
+
+## A Simple Admissions Example
+
+Consider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.
+
+| Department | Women admitted | Women applicants | Women's rate | Men admitted | Men applicants | Men's rate |
+|:---|---:|---:|---:|---:|---:|---:|
+| A | 9 | 10 | 90% | 72 | 90 | 80% |
+| B | 20 | 100 | 20% | 1 | 10 | 10% |
+
+Within Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.
+
+Now combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.
+
+```{r}
+#| echo: false
+#| fig-cap: "Admission rates by department and overall"
+
+rates <- matrix(
+  c(90, 20, 29 / 110 * 100,
+    80, 10, 73 / 100 * 100),
+  nrow = 2,
+  byrow = TRUE
+)
+
+colnames(rates) <- c("Department A", "Department B", "Overall")
+rownames(rates) <- c("Women", "Men")
+
+barplot(
+  rates,
+  beside = TRUE,
+  col = c("#A6CEE3", "#1F78B4"),
+  ylim = c(0, 100),
+  ylab = "Admission rate (%)",
+  legend.text = rownames(rates),
+  args.legend = list(x = "topright", bty = "n")
+)
+```
+
+## Why Does the Reversal Happen?
+
+The key is that the overall rate is a **weighted average**. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.
+
+For women, the overall admission rate is
+
+$$\frac{10}{110}(0.90)+\frac{100}{110}(0.20)\approx 0.264.$$
+
+For men, it is
+
+$$\frac{90}{100}(0.80)+\frac{10}{100}(0.10)=0.73.$$
+
+The arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.
+
+In statistical language, department is a **lurking variable** or **confounding variable**: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process.
+
+## Why It Matters
+
+Simpson's paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.
+
+The lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.
+
+Simpson's paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: **What has been combined, and what information did that combination hide?**
