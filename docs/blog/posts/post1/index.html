@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer Xu">
-<meta name="dcterms.date" content="2026-08-31">
+<meta name="dcterms.date" content="2026-09-14">
 
-<title>Simpson’s Paradox: When the Same Data Tells Opposite Stories – Jennifer Xu</title>
+<title>Why Do Students Who Study More Appear to Have Lower GPAs? – Jennifer Xu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,10 +25,46 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -45,11 +81,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -105,11 +141,48 @@ window.Quarto = {
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jennifer Xu</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../bio.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -118,11 +191,12 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Simpson’s Paradox: When the Same Data Tells Opposite Stories</h1>
+<h1 class="title">Why Do Students Who Study More Appear to Have Lower GPAs?</h1>
+<p class="subtitle lead">Omitted Variable Bias and a Double Machine Learning Solution</p>
   <div class="quarto-categories">
     <div class="quarto-category">statistics</div>
-    <div class="quarto-category">economics</div>
-    <div class="quarto-category">data science</div>
+    <div class="quarto-category">econometrics</div>
+    <div class="quarto-category">machine learning</div>
   </div>
   </div>
 
@@ -140,7 +214,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 31, 2026</p>
+      <p class="date">September 14, 2026</p>
     </div>
   </div>
   
@@ -152,81 +226,54 @@ window.Quarto = {
 </header>
 
 
-<p>Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.</p>
-<p>This reversal is called <strong>Simpson’s paradox</strong>. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups.</p>
-<section id="a-simple-admissions-example" class="level2">
-<h2 class="anchored" data-anchor-id="a-simple-admissions-example">A Simple Admissions Example</h2>
-<p>Consider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Department</th>
-<th style="text-align: right;">Women admitted</th>
-<th style="text-align: right;">Women applicants</th>
-<th style="text-align: right;">Women’s rate</th>
-<th style="text-align: right;">Men admitted</th>
-<th style="text-align: right;">Men applicants</th>
-<th style="text-align: right;">Men’s rate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">90%</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">90</td>
-<td style="text-align: right;">80%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">20%</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10%</td>
-</tr>
-</tbody>
-</table>
-<p>Within Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.</p>
-<p>Now combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.</p>
+<p>Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one additional hour of weekly study is associated with a <strong>0.018-point decrease</strong> in college GPA. Should students close their textbooks?</p>
+<p>Not so fast. This surprising result illustrates <strong>omitted variable bias</strong>: a regression coefficient can absorb the influence of an important variable that was left out of the model.</p>
+<section id="how-the-data-were-simulated" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-data-were-simulated">How the Data Were Simulated</h2>
+<p>I generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.</p>
+<p>This design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying.</p>
+</section>
+<section id="a-misleading-first-impression" class="level2">
+<h2 class="anchored" data-anchor-id="a-misleading-first-impression">A Misleading First Impression</h2>
+<p>I simulated students’ weekly study hours and college GPAs, together with four background characteristics: high school GPA, attendance, sleep, and stress. The simulation deliberately represents a plausible pattern: students with weaker academic preparation tend to study longer because they need more time to master the same material. At the same time, prior preparation directly predicts college GPA.</p>
+<p>The complete analysis is available in the <a href="bp1_gpa_ovb.R">reproducible R script</a>, and the <a href="bp1_gpa_simulated_data.csv">simulated dataset</a> contains no real student records.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>naive_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(college_gpa <span class="sc">~</span> study_hours, <span class="at">data =</span> students)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>adjusted_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  college_gpa <span class="sc">~</span> study_hours <span class="sc">+</span> high_school_gpa <span class="sc">+</span> attendance <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    sleep_hours <span class="sc">+</span> <span class="fu">I</span>((sleep_hours <span class="sc">-</span> <span class="dv">7</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> stress <span class="sc">+</span> <span class="fu">I</span>(stress<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> students</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Admission rates by department and overall</figcaption>
+<p><img src="bp1_gpa_ovb_figure.png" class="img-fluid figure-img" alt="A scatterplot of study hours and college GPA followed by a coefficient plot comparing naive regression, adjusted regression, double machine learning, and the true simulated effect."></p>
+<figcaption>The naive relationship is negative, but the estimated effect becomes positive after student background is taken into account.</figcaption>
 </figure>
 </div>
-</div>
-</div>
+<p>The red line in the upper panel slopes downward. However, the colors reveal what that line hides: students with lower high school GPAs are concentrated toward the right because they generally study longer, while students with stronger preparation can earn high college GPAs with fewer hours.</p>
 </section>
-<section id="why-does-the-reversal-happen" class="level2">
-<h2 class="anchored" data-anchor-id="why-does-the-reversal-happen">Why Does the Reversal Happen?</h2>
-<p>The key is that the overall rate is a <strong>weighted average</strong>. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.</p>
-<p>For women, the overall admission rate is</p>
-<p><span class="math display">\[\frac{10}{110}(0.90)+\frac{100}{110}(0.20)\approx 0.264.\]</span></p>
-<p>For men, it is</p>
-<p><span class="math display">\[\frac{90}{100}(0.80)+\frac{10}{100}(0.10)=0.73.\]</span></p>
-<p>The arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.</p>
-<p>In statistical language, department is a <strong>lurking variable</strong> or <strong>confounding variable</strong>: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process.</p>
+<section id="where-the-bias-comes-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-bias-comes-from">Where the Bias Comes From</h2>
+<p>Let <span class="math inline">\(Y\)</span> be college GPA, <span class="math inline">\(D\)</span> be study hours, and <span class="math inline">\(A\)</span> be prior academic preparation. The relationship of interest is</p>
+<p><span class="math display">\[Y = \beta D + \gamma A + \varepsilon.\]</span></p>
+<p>If preparation is excluded, its influence does not disappear. Instead, some of it enters the estimated coefficient on study hours. Here, preparation raises college GPA but is negatively related to study time. The naive regression therefore mixes the positive effect of studying with the negative association between studying and prior preparation.</p>
+<p>Once I control for observed student characteristics, the estimated effect changes from <strong>−0.018</strong> to <strong>+0.071 GPA points per additional weekly study hour</strong>. The comparison is now between students with similar backgrounds rather than between fundamentally different students.</p>
 </section>
-<section id="why-it-matters" class="level2">
-<h2 class="anchored" data-anchor-id="why-it-matters">Why It Matters</h2>
-<p>Simpson’s paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.</p>
-<p>The lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.</p>
-<p>Simpson’s paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: <strong>What has been combined, and what information did that combination hide?</strong></p>
+<section id="where-double-machine-learning-enters" class="level2">
+<h2 class="anchored" data-anchor-id="where-double-machine-learning-enters">Where Double Machine Learning Enters</h2>
+<p>An ordinary regression requires the analyst to specify how every control variable enters the model. That becomes difficult when there are many controls or nonlinear relationships. <strong>Double machine learning (DML)</strong> uses flexible prediction models to remove the part of both GPA and study time that can be explained by the observed background variables.</p>
+<p>First, a machine-learning model predicts GPA from the controls. A second model predicts study hours from the same controls. DML then relates the two sets of unexplained residuals. I used XGBoost with five-fold <strong>cross-fitting</strong>, so each student’s residual was produced by a model that was trained on other students. This reduces the risk that overfitting contaminates the final estimate.</p>
+<p>The DML estimate is <strong>+0.070</strong>, with a 95% confidence interval from <strong>+0.065 to +0.076</strong>. It is close to both the adjusted regression estimate and the true effect of +0.075 used to generate the data.</p>
+</section>
+<section id="what-dml-cannot-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-dml-cannot-do">What DML Cannot Do</h2>
+<p>DML is not a machine that automatically discovers causality. It can flexibly adjust for variables that were measured, but it cannot recover information that was never recorded. If motivation or family support affects both study time and GPA but is absent from the data, the estimate may still be biased.</p>
+<p>The larger lesson is simple: a regression coefficient does not interpret itself. Before concluding that studying lowers GPA—or that any behavior causes an outcome—we should ask who is being compared and which relevant differences have been left out.</p>
 
 
 </section>
@@ -633,6 +680,19 @@ window.Quarto = {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="images/UniversityofPennsylvania_FullLogo_RGB.jpeg" class="img-fluid" width="100"></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Jennifer Xu</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
