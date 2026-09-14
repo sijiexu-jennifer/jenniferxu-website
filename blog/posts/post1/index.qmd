@@ -1,73 +1,68 @@
 ---
-title: "Simpson's Paradox: When the Same Data Tells Opposite Stories"
+title: "Why Do Students Who Study More Appear to Have Lower GPAs?"
+subtitle: "Omitted Variable Bias and a Double Machine Learning Solution"
 author: "Jennifer Xu"
-date: "2026-08-31"
-categories: [statistics, economics, data science]
-format: html
+date: "2026-09-14"
+categories: [statistics, econometrics, machine learning]
+format:
+  html:
+    code-fold: true
+    code-summary: "Show code"
 ---
 
-Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.
+Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one additional hour of weekly study is associated with a **0.018-point decrease** in college GPA. Should students close their textbooks?
 
-This reversal is called **Simpson's paradox**. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups.
+Not so fast. This surprising result illustrates **omitted variable bias**: a regression coefficient can absorb the influence of an important variable that was left out of the model.
 
-## A Simple Admissions Example
+## How the Data Were Simulated
 
-Consider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.
+I generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.
 
-| Department | Women admitted | Women applicants | Women's rate | Men admitted | Men applicants | Men's rate |
-|:---|---:|---:|---:|---:|---:|---:|
-| A | 9 | 10 | 90% | 72 | 90 | 80% |
-| B | 20 | 100 | 20% | 1 | 10 | 10% |
+This design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying.
 
-Within Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.
+## A Misleading First Impression
 
-Now combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.
+I simulated students' weekly study hours and college GPAs, together with four background characteristics: high school GPA, attendance, sleep, and stress. The simulation deliberately represents a plausible pattern: students with weaker academic preparation tend to study longer because they need more time to master the same material. At the same time, prior preparation directly predicts college GPA.
+
+The complete analysis is available in the [reproducible R script](bp1_gpa_ovb.R), and the [simulated dataset](bp1_gpa_simulated_data.csv) contains no real student records.
 
 ```{r}
-#| echo: false
-#| fig-cap: "Admission rates by department and overall"
+#| eval: false
+#| code-fold: true
 
-rates <- matrix(
-  c(90, 20, 29 / 110 * 100,
-    80, 10, 73 / 100 * 100),
-  nrow = 2,
-  byrow = TRUE
-)
+naive_model <- lm(college_gpa ~ study_hours, data = students)
 
-colnames(rates) <- c("Department A", "Department B", "Overall")
-rownames(rates) <- c("Women", "Men")
-
-barplot(
-  rates,
-  beside = TRUE,
-  col = c("#A6CEE3", "#1F78B4"),
-  ylim = c(0, 100),
-  ylab = "Admission rate (%)",
-  legend.text = rownames(rates),
-  args.legend = list(x = "topright", bty = "n")
+adjusted_model <- lm(
+  college_gpa ~ study_hours + high_school_gpa + attendance +
+    sleep_hours + I((sleep_hours - 7)^2) + stress + I(stress^2),
+  data = students
 )
 ```
 
-## Why Does the Reversal Happen?
+![The naive relationship is negative, but the estimated effect becomes positive after student background is taken into account.](bp1_gpa_ovb_figure.png){fig-alt="A scatterplot of study hours and college GPA followed by a coefficient plot comparing naive regression, adjusted regression, double machine learning, and the true simulated effect."}
 
-The key is that the overall rate is a **weighted average**. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.
+The red line in the upper panel slopes downward. However, the colors reveal what that line hides: students with lower high school GPAs are concentrated toward the right because they generally study longer, while students with stronger preparation can earn high college GPAs with fewer hours.
 
-For women, the overall admission rate is
+## Where the Bias Comes From
 
-$$\frac{10}{110}(0.90)+\frac{100}{110}(0.20)\approx 0.264.$$
+Let $Y$ be college GPA, $D$ be study hours, and $A$ be prior academic preparation. The relationship of interest is
 
-For men, it is
+$$Y = \beta D + \gamma A + \varepsilon.$$
 
-$$\frac{90}{100}(0.80)+\frac{10}{100}(0.10)=0.73.$$
+If preparation is excluded, its influence does not disappear. Instead, some of it enters the estimated coefficient on study hours. Here, preparation raises college GPA but is negatively related to study time. The naive regression therefore mixes the positive effect of studying with the negative association between studying and prior preparation.
 
-The arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.
+Once I control for observed student characteristics, the estimated effect changes from **−0.018** to **+0.071 GPA points per additional weekly study hour**. The comparison is now between students with similar backgrounds rather than between fundamentally different students.
 
-In statistical language, department is a **lurking variable** or **confounding variable**: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process.
+## Where Double Machine Learning Enters
 
-## Why It Matters
+An ordinary regression requires the analyst to specify how every control variable enters the model. That becomes difficult when there are many controls or nonlinear relationships. **Double machine learning (DML)** uses flexible prediction models to remove the part of both GPA and study time that can be explained by the observed background variables.
 
-Simpson's paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.
+First, a machine-learning model predicts GPA from the controls. A second model predicts study hours from the same controls. DML then relates the two sets of unexplained residuals. I used XGBoost with five-fold **cross-fitting**, so each student's residual was produced by a model that was trained on other students. This reduces the risk that overfitting contaminates the final estimate.
 
-The lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.
+The DML estimate is **+0.070**, with a 95% confidence interval from **+0.065 to +0.076**. It is close to both the adjusted regression estimate and the true effect of +0.075 used to generate the data.
 
-Simpson's paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: **What has been combined, and what information did that combination hide?**
+## What DML Cannot Do
+
+DML is not a machine that automatically discovers causality. It can flexibly adjust for variables that were measured, but it cannot recover information that was never recorded. If motivation or family support affects both study time and GPA but is absent from the data, the estimate may still be biased.
+
+The larger lesson is simple: a regression coefficient does not interpret itself. Before concluding that studying lowers GPA—or that any behavior causes an outcome—we should ask who is being compared and which relevant differences have been left out.

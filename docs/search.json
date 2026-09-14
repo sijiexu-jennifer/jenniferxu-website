@@ -2,9 +2,9 @@
   {
     "objectID": "blog/posts/post1/index.html",
     "href": "blog/posts/post1/index.html",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
     "section": "",
-    "text": "Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.\nThis reversal is called Simpson’s paradox. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups."
+    "text": "Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one additional hour of weekly study is associated with a 0.018-point decrease in college GPA. Should students close their textbooks?\nNot so fast. This surprising result illustrates omitted variable bias: a regression coefficient can absorb the influence of an important variable that was left out of the model."
   },
   {
     "objectID": "blog/posts/post1/index.html#a-simple-admissions-example",
@@ -74,7 +74,7 @@
     "href": "resume.html",
     "title": "Resume",
     "section": "",
-    "text": "Download my resume here: ## Resume PDF"
+    "text": "Download my resume here: Resume PDF"
   },
   {
     "objectID": "about.html",
@@ -96,5 +96,68 @@
     "title": "Blog",
     "section": "",
     "text": "Simpson’s Paradox: When the Same Data Tells Opposite Stories\n\n\n\n\n\n\n\n\nAug 31, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#a-misleading-first-impression",
+    "href": "blog/posts/post1/index.html#a-misleading-first-impression",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "A Misleading First Impression",
+    "text": "A Misleading First Impression\nI simulated students’ weekly study hours and college GPAs, together with four background characteristics: high school GPA, attendance, sleep, and stress. The simulation deliberately represents a plausible pattern: students with weaker academic preparation tend to study longer because they need more time to master the same material. At the same time, prior preparation directly predicts college GPA.\nThe complete analysis is available in the reproducible R script, and the simulated dataset contains no real student records.\n\n\nShow code\nnaive_model &lt;- lm(college_gpa ~ study_hours, data = students)\n\nadjusted_model &lt;- lm(\n  college_gpa ~ study_hours + high_school_gpa + attendance +\n    sleep_hours + I((sleep_hours - 7)^2) + stress + I(stress^2),\n  data = students\n)\n\n\n\n\n\nThe naive relationship is negative, but the estimated effect becomes positive after student background is taken into account.\n\n\nThe red line in the upper panel slopes downward. However, the colors reveal what that line hides: students with lower high school GPAs are concentrated toward the right because they generally study longer, while students with stronger preparation can earn high college GPAs with fewer hours."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#where-the-bias-comes-from",
+    "href": "blog/posts/post1/index.html#where-the-bias-comes-from",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "Where the Bias Comes From",
+    "text": "Where the Bias Comes From\nLet \\(Y\\) be college GPA, \\(D\\) be study hours, and \\(A\\) be prior academic preparation. The relationship of interest is\n\\[Y = \\beta D + \\gamma A + \\varepsilon.\\]\nIf preparation is excluded, its influence does not disappear. Instead, some of it enters the estimated coefficient on study hours. Here, preparation raises college GPA but is negatively related to study time. The naive regression therefore mixes the positive effect of studying with the negative association between studying and prior preparation.\nOnce I control for observed student characteristics, the estimated effect changes from −0.018 to +0.071 GPA points per additional weekly study hour. The comparison is now between students with similar backgrounds rather than between fundamentally different students."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#where-double-machine-learning-enters",
+    "href": "blog/posts/post1/index.html#where-double-machine-learning-enters",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "Where Double Machine Learning Enters",
+    "text": "Where Double Machine Learning Enters\nAn ordinary regression requires the analyst to specify how every control variable enters the model. That becomes difficult when there are many controls or nonlinear relationships. Double machine learning (DML) uses flexible prediction models to remove the part of both GPA and study time that can be explained by the observed background variables.\nFirst, a machine-learning model predicts GPA from the controls. A second model predicts study hours from the same controls. DML then relates the two sets of unexplained residuals. I used XGBoost with five-fold cross-fitting, so each student’s residual was produced by a model that was trained on other students. This reduces the risk that overfitting contaminates the final estimate.\nThe DML estimate is +0.070, with a 95% confidence interval from +0.065 to +0.076. It is close to both the adjusted regression estimate and the true effect of +0.075 used to generate the data."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#what-dml-cannot-do",
+    "href": "blog/posts/post1/index.html#what-dml-cannot-do",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "What DML Cannot Do",
+    "text": "What DML Cannot Do\nDML is not a machine that automatically discovers causality. It can flexibly adjust for variables that were measured, but it cannot recover information that was never recorded. If motivation or family support affects both study time and GPA but is absent from the data, the estimate may still be biased.\nThe larger lesson is simple: a regression coefficient does not interpret itself. Before concluding that studying lowers GPA—or that any behavior causes an outcome—we should ask who is being compared and which relevant differences have been left out."
+  },
+  {
+    "objectID": "blog/posts/post1/index_simpsons_backup.html",
+    "href": "blog/posts/post1/index_simpsons_backup.html",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "",
+    "text": "Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.\nThis reversal is called Simpson’s paradox. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups."
+  },
+  {
+    "objectID": "blog/posts/post1/index_simpsons_backup.html#a-simple-admissions-example",
+    "href": "blog/posts/post1/index_simpsons_backup.html#a-simple-admissions-example",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "A Simple Admissions Example",
+    "text": "A Simple Admissions Example\nConsider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.\n\n\n\n\n\n\n\n\n\n\n\n\nDepartment\nWomen admitted\nWomen applicants\nWomen’s rate\nMen admitted\nMen applicants\nMen’s rate\n\n\n\n\nA\n9\n10\n90%\n72\n90\n80%\n\n\nB\n20\n100\n20%\n1\n10\n10%\n\n\n\nWithin Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.\nNow combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.\n\n\n\n\n\nAdmission rates by department and overall"
+  },
+  {
+    "objectID": "blog/posts/post1/index_simpsons_backup.html#why-does-the-reversal-happen",
+    "href": "blog/posts/post1/index_simpsons_backup.html#why-does-the-reversal-happen",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "Why Does the Reversal Happen?",
+    "text": "Why Does the Reversal Happen?\nThe key is that the overall rate is a weighted average. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.\nFor women, the overall admission rate is\n\\[\\frac{10}{110}(0.90)+\\frac{100}{110}(0.20)\\approx 0.264.\\]\nFor men, it is\n\\[\\frac{90}{100}(0.80)+\\frac{10}{100}(0.10)=0.73.\\]\nThe arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.\nIn statistical language, department is a lurking variable or confounding variable: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process."
+  },
+  {
+    "objectID": "blog/posts/post1/index_simpsons_backup.html#why-it-matters",
+    "href": "blog/posts/post1/index_simpsons_backup.html#why-it-matters",
+    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nSimpson’s paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.\nThe lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.\nSimpson’s paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: What has been combined, and what information did that combination hide?"
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#how-the-data-were-simulated",
+    "href": "blog/posts/post1/index.html#how-the-data-were-simulated",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "How the Data Were Simulated",
+    "text": "How the Data Were Simulated\nI generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.\nThis design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying."
   }
 ]
