@@ -27,6 +27,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
@@ -45,11 +46,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -134,11 +135,48 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Jennifer Xu</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bio.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../blog/index.html" aria-current="page"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -170,24 +208,24 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcyUyQ2Vjb25vbWljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1788148800000" data-listing-file-modified-sort="1788202967586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="594">
+<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcyUyQ2Vjb25vbWV0cmljcyUyQ21hY2hpbmUlMjBsZWFybmluZw==" data-listing-date-sort="1789358400000" data-listing-file-modified-sort="1789412100885" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="742">
 <div class="thumbnail"><a href="../blog/posts/post1/index.html" class="no-external">
 
-<p class="card-img-top"><img loading='lazy' src="posts/post1/index_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img loading='lazy' src="posts/post1/bp1_gpa_ovb_figure.png" alt="A scatterplot of study hours and college GPA followed by a coefficient plot comparing naive regression, adjusted regression, double machine learning, and the true simulated effect."  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../blog/posts/post1/index.html" class="no-external">Simpson’s Paradox: When the Same Data Tells Opposite Stories</a>
+<a href="../blog/posts/post1/index.html" class="no-external">Why Do Students Who Study More Appear to Have Lower GPAs?</a>
 </h3>
 <div class="delink listing-description"><a href="../blog/posts/post1/index.html" class="no-external">
-Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher…
+Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one…<strong></strong>
 </a></div>
 </div>
 <div class="metadata">
 <a href="../blog/posts/post1/index.html" class="no-external">
 <div class="listing-date">
-Aug 31, 2026
+Sep 14, 2026
 </div>
 <div class="listing-author">
 Jennifer Xu
@@ -599,6 +637,19 @@ Jennifer Xu
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="https://sijiexu-jennifer.github.io/jenniferxu-website/images/UniversityofPennsylvania_FullLogo_RGB.jpeg" class="img-fluid" width="100"></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Jennifer Xu</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

@@ -1,6 +1,5 @@
 ---
 title: "Why Do Students Who Study More Appear to Have Lower GPAs?"
-subtitle: "Omitted Variable Bias and a Double Machine Learning Solution"
 author: "Jennifer Xu"
 date: "2026-09-14"
 categories: [statistics, econometrics, machine learning]
