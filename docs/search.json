@@ -95,7 +95,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Why Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+    "text": "What Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post1/index.html#a-misleading-first-impression",
@@ -159,5 +159,47 @@
     "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
     "section": "How the Data Were Simulated",
     "text": "How the Data Were Simulated\nI generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.\nThis design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html",
+    "href": "blog/posts/post2/index.html",
+    "title": "What Should a Budget-Conscious Reader Browse First?",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(scales)\nlibrary(knitr)\n\nbooks &lt;- read_csv(\"data/books.csv\", show_col_types = FALSE)\ncategory_summary &lt;- read_csv(\"data/category_summary.csv\", show_col_types = FALSE)\nrecommendations &lt;- read_csv(\"data/recommendations.csv\", show_col_types = FALSE)"
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#the-question",
+    "href": "blog/posts/post2/index.html#the-question",
+    "title": "What Should a Budget-Conscious Reader Browse First?",
+    "section": "The question",
+    "text": "The question\nOnline stores offer thousands of choices, but a low sticker price is not necessarily a good value. A reader with a £20 ceiling probably wants both affordability and some evidence of quality. I therefore asked: Which book categories give a budget-conscious shopper the best chance of finding a highly rated book for £20 or less?\nThe data come from Books to Scrape, a fictional bookstore created specifically for web-scraping practice. Because the site is a sandbox rather than a real retailer, the exercise is ethical and reproducible; no login, CAPTCHA, or access restriction is bypassed. The prices and ratings are fictional, so the recommendation demonstrates a decision method rather than advice about today’s real book market."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#collecting-and-cleaning-the-catalog",
+    "href": "blog/posts/post2/index.html#collecting-and-cleaning-the-catalog",
+    "title": "What Should a Budget-Conscious Reader Browse First?",
+    "section": "Collecting and cleaning the catalog",
+    "text": "Collecting and cleaning the catalog\nI used rvest to read the home page and extract links to every category. The scraper then visited each category page, followed its “next” link, and paused 0.35 seconds between requests. From every product card it collected the full title, price, star-rating class, stock status, and URL. The complete scraping code is in scrape_analyze.R; its core extraction step is shown below.\npage &lt;- read_html(url)\ncards &lt;- html_elements(page, \"article.product_pod\")\n\ntibble(\n  title = html_attr(html_element(cards, \"h3 a\"), \"title\"),\n  price_gbp = parse_number(html_text2(html_element(cards, \".price_color\"))),\n  rating_word = str_remove(\n    html_attr(html_element(cards, \"p.star-rating\"), \"class\"),\n    \"star-rating\\\\s+\"\n  )\n)\nThe rating words (“One” through “Five”) were converted to integers, pound signs were removed from prices, and duplicate product URLs were dropped. Validation checks require exactly 1,000 books and no missing prices or ratings. I defined a budget-quality book as one rated four or five stars and priced at no more than £20. To avoid a misleading win by a tiny niche, category comparisons include only categories containing at least 10 books."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#results",
+    "href": "blog/posts/post2/index.html#results",
+    "title": "What Should a Budget-Conscious Reader Browse First?",
+    "section": "Results",
+    "text": "Results\nAcross the catalog, 1000 books appeared in 50 categories. 7.5% of all books met both the quality and price thresholds. The figure ranks the ten strongest eligible categories by the share of their inventory that met both conditions.\n\n\n\nBudget-quality availability by category.\n\n\ncategory_summary |&gt;\n  slice_head(n = 5) |&gt;\n  transmute(\n    Category = category,\n    Books = books,\n    `Median price` = dollar(median_price_gbp, prefix = \"£\"),\n    `Average rating` = round(average_rating, 2),\n    `Budget-quality share` = percent(budget_quality_share, accuracy = 1)\n  ) |&gt;\n  kable(align = c(\"l\", \"r\", \"r\", \"r\", \"r\"))\n\n\n\n\n\n\n\n\n\n\nCategory\nBooks\nMedian price\nAverage rating\nBudget-quality share\n\n\n\n\nPoetry\n19\n£38.77\n3.53\n21%\n\n\nHumor\n10\n£31.29\n3.40\n20%\n\n\nPhilosophy\n11\n£29.93\n2.36\n18%\n\n\nScience\n14\n£30.02\n2.93\n14%\n\n\nFood and Drink\n30\n£31.83\n2.90\n13%\n\n\n\nPoetry ranks first: 21% of its listings clear both hurdles, compared with 8% catalog-wide. Its median price is £38.77. A shopper who is flexible about genre should start there, then compare the next few categories in the table. Someone choosing a specific title can use the generated recommendations.csv, which sorts in-stock qualifying books by rating and then price.\nThis ranking is descriptive, not a claim that price causes ratings or that star ratings measure literary merit. Books to Scrape also provides no review counts, so a five-star item cannot be weighted by the amount of feedback behind it. Different cutoffs would change the ranking; £20 and four stars simply make the shopping rule explicit and easy to revise in the script."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#takeaway",
+    "href": "blog/posts/post2/index.html#takeaway",
+    "title": "What Should a Budget-Conscious Reader Browse First?",
+    "section": "Takeaway",
+    "text": "Takeaway\nWeb scraping becomes useful when it is tied to a decision rule. Here, rvest transformed paginated product cards into a clean catalog, while a combined price-and-quality threshold turned that catalog into a browsing recommendation. For a £20 shopper in this simulated store, begin with Poetry, where the probability of finding an affordable, highly rated option is greatest among categories with a meaningful selection. The same workflow could be reused on a permitted real catalog—after checking its terms and robots.txt—to guide an actual purchase."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#related-research",
+    "href": "blog/posts/post2/index.html#related-research",
+    "title": "What Should a Budget-Conscious Reader Browse First?",
+    "section": "Related research",
+    "text": "Related research\nThis project is a small-scale example of a broader use of web-scraped prices in economic research. Cavallo and Rigobon’s Billion Prices Project collected online prices to construct daily inflation indexes across multiple countries. Their research shows that web data can supplement traditional price statistics by providing information more frequently. In another study, Aparicio and Cavallo used scraped supermarket prices to examine how price controls affected inflation, product availability, and price dispersion in Argentina. The present analysis asks a simpler consumer-level question, but it follows the same general process: collect online product information, create a transparent comparison measure, and translate the results into a practical decision."
   }
 ]

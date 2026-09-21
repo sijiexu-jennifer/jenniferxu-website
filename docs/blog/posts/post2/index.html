@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
+<meta name="author" content="Jennifer Xu">
 <meta name="dcterms.date" content="2026-09-21">
 
 <title>What Should a Budget-Conscious Reader Browse First? – Jennifer Xu</title>
@@ -165,6 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#collecting-and-cleaning-the-catalog" id="toc-collecting-and-cleaning-the-catalog" class="nav-link" data-scroll-target="#collecting-and-cleaning-the-catalog">Collecting and cleaning the catalog</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway">Takeaway</a></li>
+  <li><a href="#related-research" id="toc-related-research" class="nav-link" data-scroll-target="#related-research">Related research</a></li>
   </ul>
 </nav>
     </div>
@@ -184,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
+             <p>Jennifer Xu </p>
           </div>
   </div>
     
@@ -307,12 +308,16 @@ Budget-quality availability by category.
 </tr>
 </tbody>
 </table>
-<p>Poetry ranks first: 21% of its listings clear both hurdles, compared with 8% catalog-wide. Its median price is £38.77. A shopper who is flexible about genre should start there, then compare the next few categories in the table. Someone choosing a specific title can use the generated <code>recommendations.csv</code>, which sorts in-stock qualifying books by rating and then price.</p>
+<p>Poetry ranks first: 21% of its listings clear both hurdles, compared with 8% catalog-wide. Its median price is £38.77. A shopper who is flexible about genre should start there, then compare the next few categories in the table. Someone choosing a specific title can use the generated <a href="data/recommendations.csv"><code>recommendations.csv</code></a>, which sorts in-stock qualifying books by rating and then price.</p>
 <p>This ranking is descriptive, not a claim that price causes ratings or that star ratings measure literary merit. Books to Scrape also provides no review counts, so a five-star item cannot be weighted by the amount of feedback behind it. Different cutoffs would change the ranking; £20 and four stars simply make the shopping rule explicit and easy to revise in the script.</p>
 </section>
 <section id="takeaway" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
 <p>Web scraping becomes useful when it is tied to a decision rule. Here, <a href="https://rvest.tidyverse.org/"><code>rvest</code></a> transformed paginated product cards into a clean catalog, while a combined price-and-quality threshold turned that catalog into a browsing recommendation. For a £20 shopper in this simulated store, begin with <strong>Poetry</strong>, where the probability of finding an affordable, highly rated option is greatest among categories with a meaningful selection. The same workflow could be reused on a permitted real catalog—after checking its terms and <code>robots.txt</code>—to guide an actual purchase.</p>
+</section>
+<section id="related-research" class="level2">
+<h2 class="anchored" data-anchor-id="related-research">Related research</h2>
+<p>This project is a small-scale example of a broader use of web-scraped prices in economic research. <a href="https://www.nber.org/papers/w22111">Cavallo and Rigobon’s</a> Billion Prices Project collected online prices to construct daily inflation indexes across multiple countries. Their research shows that web data can supplement traditional price statistics by providing information more frequently. In another study, <a href="https://www.nber.org/papers/w24275">Aparicio and Cavallo</a> used scraped supermarket prices to examine how price controls affected inflation, product availability, and price dispersion in Argentina. The present analysis asks a simpler consumer-level question, but it follows the same general process: collect online product information, create a transparent comparison measure, and translate the results into a practical decision.</p>
 
 
 <!-- -->
@@ -774,7 +779,7 @@ Budget-quality availability by category.
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "What Should a Budget-Conscious Reader Browse First?"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Using rvest to turn a fictional bookstore catalog into an actionable recommendation"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Your Name"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jennifer Xu"</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>

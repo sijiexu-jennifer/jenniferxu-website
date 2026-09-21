@@ -1,7 +1,7 @@
 ---
 title: "What Should a Budget-Conscious Reader Browse First?"
 subtitle: "Using rvest to turn a fictional bookstore catalog into an actionable recommendation"
-author: "Your Name"
+author: "Jennifer Xu"
 date: today
 format:
   html:
