@@ -1,33 +1,5 @@
 [
   {
-    "objectID": "blog/posts/post1/index.html",
-    "href": "blog/posts/post1/index.html",
-    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
-    "section": "",
-    "text": "Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one additional hour of weekly study is associated with a 0.018-point decrease in college GPA. Should students close their textbooks?\nNot so fast. This surprising result illustrates omitted variable bias: a regression coefficient can absorb the influence of an important variable that was left out of the model."
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#a-simple-admissions-example",
-    "href": "blog/posts/post1/index.html#a-simple-admissions-example",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "A Simple Admissions Example",
-    "text": "A Simple Admissions Example\nConsider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.\n\n\n\n\n\n\n\n\n\n\n\n\nDepartment\nWomen admitted\nWomen applicants\nWomen’s rate\nMen admitted\nMen applicants\nMen’s rate\n\n\n\n\nA\n9\n10\n90%\n72\n90\n80%\n\n\nB\n20\n100\n20%\n1\n10\n10%\n\n\n\nWithin Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.\nNow combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.\n\n\n\n\n\nAdmission rates by department and overall"
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#why-does-the-reversal-happen",
-    "href": "blog/posts/post1/index.html#why-does-the-reversal-happen",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "Why Does the Reversal Happen?",
-    "text": "Why Does the Reversal Happen?\nThe key is that the overall rate is a weighted average. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.\nFor women, the overall admission rate is\n\\[\\frac{10}{110}(0.90)+\\frac{100}{110}(0.20)\\approx 0.264.\\]\nFor men, it is\n\\[\\frac{90}{100}(0.80)+\\frac{10}{100}(0.10)=0.73.\\]\nThe arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.\nIn statistical language, department is a lurking variable or confounding variable: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process."
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#why-it-matters",
-    "href": "blog/posts/post1/index.html#why-it-matters",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "Why It Matters",
-    "text": "Why It Matters\nSimpson’s paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.\nThe lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.\nSimpson’s paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: What has been combined, and what information did that combination hide?"
-  },
-  {
     "objectID": "bio.html",
     "href": "bio.html",
     "title": "About Me",
@@ -70,95 +42,11 @@
     "text": "sijiexu@sas.upenn.edu"
   },
   {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Resume",
-    "section": "",
-    "text": "Download my resume here: Resume PDF"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Jennifer Xu",
-    "section": "",
-    "text": "Jennifer Xu\nUniversity of Pennsylvania\nWelcome to my personal website.\n\nQuick Links"
-  },
-  {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "What Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#a-misleading-first-impression",
-    "href": "blog/posts/post1/index.html#a-misleading-first-impression",
-    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
-    "section": "A Misleading First Impression",
-    "text": "A Misleading First Impression\nI simulated students’ weekly study hours and college GPAs, together with four background characteristics: high school GPA, attendance, sleep, and stress. The simulation deliberately represents a plausible pattern: students with weaker academic preparation tend to study longer because they need more time to master the same material. At the same time, prior preparation directly predicts college GPA.\nThe complete analysis is available in the reproducible R script, and the simulated dataset contains no real student records.\n\n\nShow code\nnaive_model &lt;- lm(college_gpa ~ study_hours, data = students)\n\nadjusted_model &lt;- lm(\n  college_gpa ~ study_hours + high_school_gpa + attendance +\n    sleep_hours + I((sleep_hours - 7)^2) + stress + I(stress^2),\n  data = students\n)\n\n\n\n\n\nThe naive relationship is negative, but the estimated effect becomes positive after student background is taken into account.\n\n\nThe red line in the upper panel slopes downward. However, the colors reveal what that line hides: students with lower high school GPAs are concentrated toward the right because they generally study longer, while students with stronger preparation can earn high college GPAs with fewer hours."
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#where-the-bias-comes-from",
-    "href": "blog/posts/post1/index.html#where-the-bias-comes-from",
-    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
-    "section": "Where the Bias Comes From",
-    "text": "Where the Bias Comes From\nLet \\(Y\\) be college GPA, \\(D\\) be study hours, and \\(A\\) be prior academic preparation. The relationship of interest is\n\\[Y = \\beta D + \\gamma A + \\varepsilon.\\]\nIf preparation is excluded, its influence does not disappear. Instead, some of it enters the estimated coefficient on study hours. Here, preparation raises college GPA but is negatively related to study time. The naive regression therefore mixes the positive effect of studying with the negative association between studying and prior preparation.\nOnce I control for observed student characteristics, the estimated effect changes from −0.018 to +0.071 GPA points per additional weekly study hour. The comparison is now between students with similar backgrounds rather than between fundamentally different students."
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#where-double-machine-learning-enters",
-    "href": "blog/posts/post1/index.html#where-double-machine-learning-enters",
-    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
-    "section": "Where Double Machine Learning Enters",
-    "text": "Where Double Machine Learning Enters\nAn ordinary regression requires the analyst to specify how every control variable enters the model. That becomes difficult when there are many controls or nonlinear relationships. Double machine learning (DML) uses flexible prediction models to remove the part of both GPA and study time that can be explained by the observed background variables.\nFirst, a machine-learning model predicts GPA from the controls. A second model predicts study hours from the same controls. DML then relates the two sets of unexplained residuals. I used XGBoost with five-fold cross-fitting, so each student’s residual was produced by a model that was trained on other students. This reduces the risk that overfitting contaminates the final estimate.\nThe DML estimate is +0.070, with a 95% confidence interval from +0.065 to +0.076. It is close to both the adjusted regression estimate and the true effect of +0.075 used to generate the data."
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#what-dml-cannot-do",
-    "href": "blog/posts/post1/index.html#what-dml-cannot-do",
-    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
-    "section": "What DML Cannot Do",
-    "text": "What DML Cannot Do\nDML is not a machine that automatically discovers causality. It can flexibly adjust for variables that were measured, but it cannot recover information that was never recorded. If motivation or family support affects both study time and GPA but is absent from the data, the estimate may still be biased.\nThe larger lesson is simple: a regression coefficient does not interpret itself. Before concluding that studying lowers GPA—or that any behavior causes an outcome—we should ask who is being compared and which relevant differences have been left out."
-  },
-  {
-    "objectID": "blog/posts/post1/index_simpsons_backup.html",
-    "href": "blog/posts/post1/index_simpsons_backup.html",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "",
-    "text": "Suppose a university has two departments. In each department, women have a higher admission rate than men. It seems natural to conclude that women must also have a higher admission rate across the university as a whole. Surprisingly, that conclusion can be wrong. When the departments are combined, the overall admission rate for women may be lower.\nThis reversal is called Simpson’s paradox. It occurs when a pattern that appears within several groups disappears or reverses after the groups are combined. The result feels unintuitive because we expect an overall average to preserve the direction of its parts. However, an overall average depends not only on the rates within each group, but also on the relative sizes of those groups."
-  },
-  {
-    "objectID": "blog/posts/post1/index_simpsons_backup.html#a-simple-admissions-example",
-    "href": "blog/posts/post1/index_simpsons_backup.html#a-simple-admissions-example",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "A Simple Admissions Example",
-    "text": "A Simple Admissions Example\nConsider the following fictional data. Department A is relatively easy to enter, while Department B is much more selective.\n\n\n\n\n\n\n\n\n\n\n\n\nDepartment\nWomen admitted\nWomen applicants\nWomen’s rate\nMen admitted\nMen applicants\nMen’s rate\n\n\n\n\nA\n9\n10\n90%\n72\n90\n80%\n\n\nB\n20\n100\n20%\n1\n10\n10%\n\n\n\nWithin Department A, the admission rate is 90% for women and 80% for men. Within Department B, it is 20% for women and 10% for men. Women therefore have the higher rate in both departments.\nNow combine the departments. Overall, 29 of 110 women are admitted, giving an admission rate of about 26%. For men, 73 of 100 applicants are admitted, producing a rate of 73%. The comparison has completely reversed.\n\n\n\n\n\nAdmission rates by department and overall"
-  },
-  {
-    "objectID": "blog/posts/post1/index_simpsons_backup.html#why-does-the-reversal-happen",
-    "href": "blog/posts/post1/index_simpsons_backup.html#why-does-the-reversal-happen",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "Why Does the Reversal Happen?",
-    "text": "Why Does the Reversal Happen?\nThe key is that the overall rate is a weighted average. For women, most applications go to the highly selective Department B. For men, most applications go to the less selective Department A. Consequently, the overall rates place very different weights on the two departments.\nFor women, the overall admission rate is\n\\[\\frac{10}{110}(0.90)+\\frac{100}{110}(0.20)\\approx 0.264.\\]\nFor men, it is\n\\[\\frac{90}{100}(0.80)+\\frac{10}{100}(0.10)=0.73.\\]\nThe arithmetic is not contradictory. The within-department comparisons and the overall comparison answer different questions. The first asks how admission rates compare among applicants to the same department. The second mixes department selectivity with differences in where people applied.\nIn statistical language, department is a lurking variable or confounding variable: it is associated with both the applicant group and the probability of admission. Ignoring it hides an important part of the data-generating process."
-  },
-  {
-    "objectID": "blog/posts/post1/index_simpsons_backup.html#why-it-matters",
-    "href": "blog/posts/post1/index_simpsons_backup.html#why-it-matters",
-    "title": "Simpson’s Paradox: When the Same Data Tells Opposite Stories",
-    "section": "Why It Matters",
-    "text": "Why It Matters\nSimpson’s paradox is not merely a mathematical curiosity. Similar reversals can arise when economists compare wages across industries, when medical researchers evaluate treatments across patient-risk groups, or when companies assess conversion rates across different markets. Aggregated data may produce a persuasive but misleading story.\nThe lesson is not that grouped results are always correct and overall results are always wrong. The appropriate comparison depends on the question and on how the groups were formed. Analysts should examine both aggregated and disaggregated data, understand possible confounders, and avoid treating an association as a causal effect without further evidence.\nSimpson’s paradox reminds us that more data does not automatically produce more understanding. Before trusting an average, we should always ask: What has been combined, and what information did that combination hide?"
-  },
-  {
-    "objectID": "blog/posts/post1/index.html#how-the-data-were-simulated",
-    "href": "blog/posts/post1/index.html#how-the-data-were-simulated",
-    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
-    "section": "How the Data Were Simulated",
-    "text": "How the Data Were Simulated\nI generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.\nThis design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying."
+    "text": "What Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post2/index.html",
@@ -201,5 +89,117 @@
     "title": "What Should a Budget-Conscious Reader Browse First?",
     "section": "Related research",
     "text": "Related research\nThis project is a small-scale example of a broader use of web-scraped prices in economic research. Cavallo and Rigobon’s Billion Prices Project collected online prices to construct daily inflation indexes across multiple countries. Their research shows that web data can supplement traditional price statistics by providing information more frequently. In another study, Aparicio and Cavallo used scraped supermarket prices to examine how price controls affected inflation, product availability, and price dispersion in Argentina. The present analysis asks a simpler consumer-level question, but it follows the same general process: collect online product information, create a transparent comparison measure, and translate the results into a practical decision."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Jennifer Xu",
+    "section": "",
+    "text": "Jennifer Xu\nUniversity of Pennsylvania\nWelcome to my personal website.\n\nQuick Links"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download my resume here: Resume PDF"
+  },
+  {
+    "objectID": "blog/posts/post1/index.html",
+    "href": "blog/posts/post1/index.html",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "",
+    "text": "Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one additional hour of weekly study is associated with a 0.018-point decrease in college GPA. Should students close their textbooks?\nNot so fast. This surprising result illustrates omitted variable bias: a regression coefficient can absorb the influence of an important variable that was left out of the model."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#how-the-data-were-simulated",
+    "href": "blog/posts/post1/index.html#how-the-data-were-simulated",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "How the Data Were Simulated",
+    "text": "How the Data Were Simulated\nI generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.\nThis design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#a-misleading-first-impression",
+    "href": "blog/posts/post1/index.html#a-misleading-first-impression",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "A Misleading First Impression",
+    "text": "A Misleading First Impression\nI simulated students’ weekly study hours and college GPAs, together with four background characteristics: high school GPA, attendance, sleep, and stress. The simulation deliberately represents a plausible pattern: students with weaker academic preparation tend to study longer because they need more time to master the same material. At the same time, prior preparation directly predicts college GPA.\nThe complete analysis is available in the reproducible R script, and the simulated dataset contains no real student records.\n\n\nShow code\nnaive_model &lt;- lm(college_gpa ~ study_hours, data = students)\n\nadjusted_model &lt;- lm(\n  college_gpa ~ study_hours + high_school_gpa + attendance +\n    sleep_hours + I((sleep_hours - 7)^2) + stress + I(stress^2),\n  data = students\n)\n\n\n\n\n\nThe naive relationship is negative, but the estimated effect becomes positive after student background is taken into account.\n\n\nThe red line in the upper panel slopes downward. However, the colors reveal what that line hides: students with lower high school GPAs are concentrated toward the right because they generally study longer, while students with stronger preparation can earn high college GPAs with fewer hours."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#where-the-bias-comes-from",
+    "href": "blog/posts/post1/index.html#where-the-bias-comes-from",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "Where the Bias Comes From",
+    "text": "Where the Bias Comes From\nLet \\(Y\\) be college GPA, \\(D\\) be study hours, and \\(A\\) be prior academic preparation. The relationship of interest is\n\\[Y = \\beta D + \\gamma A + \\varepsilon.\\]\nIf preparation is excluded, its influence does not disappear. Instead, some of it enters the estimated coefficient on study hours. Here, preparation raises college GPA but is negatively related to study time. The naive regression therefore mixes the positive effect of studying with the negative association between studying and prior preparation.\nOnce I control for observed student characteristics, the estimated effect changes from −0.018 to +0.071 GPA points per additional weekly study hour. The comparison is now between students with similar backgrounds rather than between fundamentally different students."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#where-double-machine-learning-enters",
+    "href": "blog/posts/post1/index.html#where-double-machine-learning-enters",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "Where Double Machine Learning Enters",
+    "text": "Where Double Machine Learning Enters\nAn ordinary regression requires the analyst to specify how every control variable enters the model. That becomes difficult when there are many controls or nonlinear relationships. Double machine learning (DML) uses flexible prediction models to remove the part of both GPA and study time that can be explained by the observed background variables.\nFirst, a machine-learning model predicts GPA from the controls. A second model predicts study hours from the same controls. DML then relates the two sets of unexplained residuals. I used XGBoost with five-fold cross-fitting, so each student’s residual was produced by a model that was trained on other students. This reduces the risk that overfitting contaminates the final estimate.\nThe DML estimate is +0.070, with a 95% confidence interval from +0.065 to +0.076. It is close to both the adjusted regression estimate and the true effect of +0.075 used to generate the data."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#what-dml-cannot-do",
+    "href": "blog/posts/post1/index.html#what-dml-cannot-do",
+    "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
+    "section": "What DML Cannot Do",
+    "text": "What DML Cannot Do\nDML is not a machine that automatically discovers causality. It can flexibly adjust for variables that were measured, but it cannot recover information that was never recorded. If motivation or family support affects both study time and GPA but is absent from the data, the estimate may still be biased.\nThe larger lesson is simple: a regression coefficient does not interpret itself. Before concluding that studying lowers GPA—or that any behavior causes an outcome—we should ask who is being compared and which relevant differences have been left out."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html",
+    "href": "blog/posts/post3/index.html",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "",
+    "text": "The U.S. labor-force participation rate measures the share of the civilian population that is either employed or actively looking for work. Unlike the unemployment rate, it also captures decisions to enter or leave the labor market. This post asks how participation changed from 2000 to 2024 and whether those changes differed across age and gender groups. The results reveal three connected trends: participation fell substantially among young people, rose among older adults, and became more similar for prime-age men and women."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#a-changing-labor-force",
+    "href": "blog/posts/post3/index.html#a-changing-labor-force",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "",
+    "text": "The U.S. labor-force participation rate measures the share of the civilian population that is either employed or actively looking for work. Unlike the unemployment rate, it also captures decisions to enter or leave the labor market. This post asks how participation changed from 2000 to 2024 and whether those changes differed across age and gender groups. The results reveal three connected trends: participation fell substantially among young people, rose among older adults, and became more similar for prime-age men and women."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#data-and-method",
+    "href": "blog/posts/post3/index.html#data-and-method",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "Data and method",
+    "text": "Data and method\nI use IPUMS Current Population Survey (CPS) Basic Monthly Samples from January 2000 through December 2024. The sample includes civilians age 16 and older whose labor-force status is defined. An individual is counted as participating when LABFORCE equals 2. Every estimate uses the final Basic Monthly person weight, WTFINL, so the results describe the represented U.S. population rather than only the downloaded observations.\nI first calculate a weighted participation rate separately for every month and demographic group. I then average the 12 monthly rates to produce each annual estimate. This gives every month equal influence on the annual number. The extract also contained ASEC supplement records, which I excluded to avoid mixing them with the Basic Monthly samples.\nThe analysis ends in 2024 because it is the most recent year in the extract with complete January–December coverage. I exclude 2025 and 2026 because comparing partial-year estimates with full-year averages could introduce seasonal differences.\n\n\nCode\n# Core weighting procedure used after reading the IPUMS extract\nmonthly_lfpr &lt;- cps |&gt;\n  filter(AGE &gt;= 16, LABFORCE %in% c(1, 2)) |&gt;\n  group_by(YEAR, MONTH, age_group) |&gt;\n  summarize(\n    lfpr = weighted.mean(LABFORCE == 2, WTFINL, na.rm = TRUE),\n    .groups = \"drop\"\n  )\n\nannual_lfpr &lt;- monthly_lfpr |&gt;\n  group_by(YEAR, age_group) |&gt;\n  summarize(lfpr = mean(lfpr), .groups = \"drop\")"
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#participation-moved-in-opposite-directions-across-ages",
+    "href": "blog/posts/post3/index.html#participation-moved-in-opposite-directions-across-ages",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "Participation moved in opposite directions across ages",
+    "text": "Participation moved in opposite directions across ages\n\n\n\nAnnual labor-force participation rates for four age groups from 2000 through 2024.\n\n\nThe age-group trends are strikingly different. Participation among people ages 16–24 fell from 66.0% in 2000 to 56.3% in 2024, a decline of 9.8 percentage points. The series reached its lowest point, 53.7%, in 2020. In contrast, participation among people ages 55–64 increased from 59.6% to 66.3%. Participation among adults age 65 and older also rose, from 13.2% to 19.9%, although it peaked at 20.7% in 2019. Prime-age participation was comparatively stable: the rate for ages 25–54 was 84.0% in 2000 and 83.7% in 2024."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#the-prime-age-gender-gap-narrowed",
+    "href": "blog/posts/post3/index.html#the-prime-age-gender-gap-narrowed",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "The prime-age gender gap narrowed",
+    "text": "The prime-age gender gap narrowed\n\n\n\nPrime-age labor-force participation rates for men and women from 2000 through 2024.\n\n\nAmong adults ages 25–54, men continued to participate at a higher rate than women, but the difference became smaller. The gap declined from 15.0 percentage points in 2000 to 11.1 points in 2024. Male participation fell from 91.7% to 89.3%, while female participation rose from 76.7% to 78.1%. Both series dropped during economic downturns, including 2020, but the longer-run convergence is clear."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#the-life-cycle-curve-shifted-most-at-the-edges",
+    "href": "blog/posts/post3/index.html#the-life-cycle-curve-shifted-most-at-the-edges",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "The life-cycle curve shifted most at the edges",
+    "text": "The life-cycle curve shifted most at the edges\n\n\n\nLabor-force participation over the life cycle in 2000, 2019, 2020, and 2024.\n\n\nThe age profiles show that participation remains highest from the late twenties through the early fifties. The largest changes occurred outside those prime working ages. For ages 16–19, participation fell from 52.4% in 2000 to 37.2% in 2024. For ages 65–69, it rose from 25.1% to 34.0%. These shifts are consistent with longer schooling at younger ages and longer working lives at older ages, although the descriptive CPS evidence alone cannot establish those explanations as causal."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#takeaway",
+    "href": "blog/posts/post3/index.html#takeaway",
+    "title": "How Has Labor-Force Participation Changed Across Age Groups?",
+    "section": "Takeaway",
+    "text": "Takeaway\nThe national labor-force participation rate conceals major differences across demographic groups. Between 2000 and 2024, younger people became less likely to participate, older adults became more likely to work or seek work, and the prime-age gender gap narrowed. Age composition and group-specific behavior therefore matter when interpreting changes in the aggregate labor market.\nData source: IPUMS CPS. Complete reproduction code is available in the GitHub repository, including the data-processing script and figure script."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
