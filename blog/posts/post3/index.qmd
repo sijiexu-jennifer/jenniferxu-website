@@ -26,7 +26,47 @@ I use IPUMS Current Population Survey (CPS) Basic Monthly Samples from January 2
 
 I first calculate a weighted participation rate separately for every month and demographic group. I then average the 12 monthly rates to produce each annual estimate. This gives every month equal influence on the annual number. The extract also contained ASEC supplement records, which I excluded to avoid mixing them with the Basic Monthly samples.
 
-The analysis ends in 2024 because it is the most recent year in the extract with complete January–December coverage. I exclude 2025 and 2026 because comparing partial-year estimates with full-year averages could introduce seasonal differences.
+The analysis ends in 2024 because it is the most recent year for which
+the extract contains complete January–December coverage. I exclude 2025
+because the October 2025 CPS was not collected during the federal
+government shutdown, leaving the year incomplete. I also exclude 2026
+because only part of the year was available when the data were downloaded.
+Including either year would make its annual average less comparable with
+the full-year estimates from 2000 through 2024 and could introduce
+seasonal differences.
+
+For demographic group $g$, year $t$, and month $m$, I calculate the
+weighted labor-force participation rate as
+
+$$
+\mathrm{LFPR}_{g,t,m}
+=
+\frac{
+\sum_{i \in (g,t,m)}
+\mathrm{WTFINL}_{i}
+\mathbf{1}\!\left(\mathrm{LABFORCE}_{i}=2\right)
+}{
+\sum_{i \in (g,t,m)}
+\mathrm{WTFINL}_{i}
+\mathbf{1}\!\left(\mathrm{LABFORCE}_{i}\in\{1,2\}\right)
+}
+\times 100.
+$$
+
+Here, $\mathbf{1}(\cdot)$ is an indicator equal to one when the stated
+condition is satisfied and zero otherwise. The numerator is the weighted
+number of people in the labor force, while the denominator is the weighted
+civilian population with a defined labor-force status.
+
+The annual participation rate is the average of the 12 monthly estimates:
+
+$$
+\mathrm{LFPR}_{g,t}
+=
+\frac{1}{12}
+\sum_{m=1}^{12}
+\mathrm{LFPR}_{g,t,m}.
+$$
 
 ```{r}
 # Core weighting procedure used after reading the IPUMS extract
@@ -63,6 +103,6 @@ The age profiles show that participation remains highest from the late twenties 
 
 ## Takeaway
 
-The national labor-force participation rate conceals major differences across demographic groups. Between 2000 and 2024, younger people became less likely to participate, older adults became more likely to work or seek work, and the prime-age gender gap narrowed. Age composition and group-specific behavior therefore matter when interpreting changes in the aggregate labor market.
+The national labor-force participation rate conceals major differences across demographic groups. Between 2000 and 2024, younger people became less likely to participate, older adults became more likely to work or seek work, and the prime-age gender gap narrowed. These patterns have important practical implications. Greater participation among older adults may help offset some labor-supply pressures created by population aging, but it also increases the importance of flexible schedules, age-friendly workplaces, retirement policy, and access to health care. Lower participation among younger people may partly reflect greater educational enrollment, but it may also raise concerns about delayed work experience and access to entry-level jobs. Meanwhile, the remaining prime-age gender gap suggests that child care, paid leave, and workplace flexibility may still influence labor-market participation. Overall, policymakers and employers should look beyond the national average and consider the distinct barriers and incentives facing different demographic groups.
 
-Data source: [IPUMS CPS](https://cps.ipums.org/cps/). Complete reproduction code is available in the [GitHub repository](https://github.com/sijiexu-jennifer/jenniferxu-website/tree/main/blog/posts/post3), including the [data-processing script](scripts/01_process_cps.py) and [figure script](scripts/02_make_figures.R).
+Data source: [IPUMS CPS](https://cps.ipums.org/cps/). Complete reproduction code is available in the [GitHub repository](https://github.com/sijiexu-jennifer/jenniferxu-website/tree/main/blog/posts/post3), including the [data-processing script](scripts/cps.py) and [figure script](scripts/plot.R).
