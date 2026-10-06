@@ -1,0 +1,7 @@
+check,value
+download_has_rows,1
+year_range_is_2000_to_2023,1
+country_year_keys_are_unique,1
+gdp_missing_share,0.0935099846390169
+life_expectancy_missing_share,0
+population_missing_share,0
