@@ -23,7 +23,7 @@ resources:
 
 ## Income and health
 
-Economic development is often described as a straightforward process: incomes rise, households and governments can afford better nutrition and health care, and people live longer. The broad pattern is real, but it may hide important differences between countries. This post asks two related questions: **Do richer countries have longer life expectancy? And do countries that grow faster also make larger gains in longevity?** This question matters because rising income is often treated as a sign that people’s lives are improving. But if countries can become richer without seeing similar gains in life expectancy, income alone may not tell us enough about their progress. 
+Money seems to buy longer lives, but only up to a point. Across 153 countries in 2023, richer countries generally had higher life expectancy. Yet countries that experienced the fastest economic growth since 2000 did not necessarily make the largest gains in longevity. Using World Bank data, I examine how the relationship differs when countries are compared at one point in time versus followed over time.This question matters because rising income is often treated as a sign that people’s lives are improving. But if countries can become richer without seeing similar gains in life expectancy, income alone may not tell us enough about their progress.
 
 ## Data and method
 

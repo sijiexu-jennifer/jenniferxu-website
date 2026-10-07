@@ -71,5 +71,3 @@ stopifnot(validation_checks$value[3] == 1)
 write_csv(validation_checks, file.path(raw_dir, "validation_checks.csv"))
 
 writeLines(capture.output(sessionInfo()), file.path(raw_dir, "session_info.txt"))
-
-message("Acquisition complete: blog/posts/post4/data/raw/wdi_download.csv")
