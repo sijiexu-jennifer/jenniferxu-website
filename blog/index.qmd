@@ -2,7 +2,10 @@
 title: "Blog"
 
 listing:
-  contents: posts
+  contents:
+    - "posts/**/index.qmd"
+    - "posts/**/index.md"
+    - "posts/**/index.Rmd"
   sort: "date desc"
   type: default
 ---

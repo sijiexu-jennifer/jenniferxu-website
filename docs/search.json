@@ -46,7 +46,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "How Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+    "text": "Where Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post2/index.html",
@@ -201,5 +201,257 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "blog/posts/post4/index.html",
+    "href": "blog/posts/post4/index.html",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "",
+    "text": "Money seems to buy longer lives, but only up to a point. Across 153 countries in 2023, richer countries generally had higher life expectancy. Yet countries that experienced the fastest economic growth since 2000 did not necessarily make the largest gains in longevity. Using World Bank data, I examine how the relationship differs when countries are compared at one point in time versus followed over time.This question matters because rising income is often treated as a sign that people’s lives are improving. But if countries can become richer without seeing similar gains in life expectancy, income alone may not tell us enough about their progress."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#income-and-health",
+    "href": "blog/posts/post4/index.html#income-and-health",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "",
+    "text": "Money seems to buy longer lives, but only up to a point. Across 153 countries in 2023, richer countries generally had higher life expectancy. Yet countries that experienced the fastest economic growth since 2000 did not necessarily make the largest gains in longevity. Using World Bank data, I examine how the relationship differs when countries are compared at one point in time versus followed over time.This question matters because rising income is often treated as a sign that people’s lives are improving. But if countries can become richer without seeing similar gains in life expectancy, income alone may not tell us enough about their progress."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#data-and-method",
+    "href": "blog/posts/post4/index.html#data-and-method",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Data and method",
+    "text": "Data and method\nI use three indicators from the World Bank World Development Indicators: life expectancy at birth, total population, and GDP per capita at purchasing-power parity. GDP is measured in constant 2021 international dollars. This adjusts for inflation and differences in price levels, making cross-country and over-time comparisons more meaningful than values measured in current U.S. dollars.\nThe data were downloaded through the official World Bank API with the WDI R package. I compare 2000 with 2023, the latest year with broad coverage across all three measures. World Bank regional aggregates are removed. For the scatterplots, I keep countries with at least one million residents in 2023 so that very small economies do not dominate the visual comparison. The repository preserves the raw download, metadata, validation results, cleaned data, and complete R scripts.\n\n\nCode\n# Download the indicators from the World Bank API\nwdi_raw &lt;- WDI(\n  country = \"all\",\n  indicator = c(\n    gdp_per_capita = \"NY.GDP.PCAP.PP.KD\",\n    life_expectancy = \"SP.DYN.LE00.IN\",\n    population = \"SP.POP.TOTL\"\n  ),\n  start = 2000,\n  end = 2023,\n  extra = TRUE\n)\n\npanel &lt;- wdi_raw |&gt;\n  filter(region != \"Aggregates\") |&gt;\n  arrange(country, year)"
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#richer-countries-tend-to-live-longer",
+    "href": "blog/posts/post4/index.html#richer-countries-tend-to-live-longer",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Richer countries tend to live longer",
+    "text": "Richer countries tend to live longer\n\n\n\nGDP per capita and life expectancy across countries in 2023. Bubble size represents population and color represents World Bank region.\n\n\nThe first figure shows a strong positive relationship between income and life expectancy. Across the 153 countries in the 2023 sample, the correlation between log GDP per capita and life expectancy is 0.88. However, the pattern begins to flatten at higher income levels. Moving from a low-income to a middle-income country is associated with a large difference in life expectancy, while income differences among wealthier countries are associated with much smaller gaps.\nThe colors also show that countries from the same region tend to cluster together. Regional differences explain part of the overall pattern, but they do not fully account for it: income and life expectancy are still positively related within most regions.\nThe United States stands out. Although it has one of the highest levels of GDP per capita, its life expectancy is lower than that of several less wealthy countries. This suggests that economic resources can support better health, but higher income does not automatically translate into longer lives.\n\n\nCode\nlatest &lt;- panel |&gt;\n  filter(year == 2023, population &gt;= 1e6) |&gt;\n  drop_na(gdp_per_capita, life_expectancy)\n\nggplot(latest, aes(gdp_per_capita, life_expectancy)) +\n  geom_point(aes(size = population, color = region), alpha = 0.72) +\n  scale_x_log10(labels = scales::label_dollar()) +\n  labs(\n    x = \"GDP per capita, constant 2021 international dollars\",\n    y = \"Life expectancy at birth (years)\"\n  )"
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#progress-differed-across-large-countries",
+    "href": "blog/posts/post4/index.html#progress-differed-across-large-countries",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Progress differed across large countries",
+    "text": "Progress differed across large countries\n\n\n\nLife expectancy in 2000 and 2023 for the ten most populous countries. Labels show the change in years.\n\n\nLife expectancy increased in all ten of the most populous countries between 2000 and 2023, although the size of the increase varied considerably. The median gain was 6.0 years. Bangladesh gained about 12.6 years and India gained about 9.3 years, while the United States gained only about 1.7 years. These differences show that improvements in health were far from equal across countries."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#growth-alone-does-not-explain-health-gains",
+    "href": "blog/posts/post4/index.html#growth-alone-does-not-explain-health-gains",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Growth alone does not explain health gains",
+    "text": "Growth alone does not explain health gains\n\n\n\nChanges in real GDP per capita and life expectancy from 2000 to 2023. The dashed line is a linear fit.\n\n\nThe third figure shows almost no relationship between income growth and improvements in life expectancy. Across 151 countries, the correlation is only 0.04, meaning that the countries with the fastest economic growth were not necessarily the ones with the largest gains in longevity. China, for example, experienced rapid income growth but a more moderate increase in life expectancy, while several African countries added many years of life with much smaller increases in income.\nOne possible explanation is that health improvements do not always require equally large increases in national income. In countries starting with lower life expectancy, wider access to vaccines, clean water, basic medical care, and maternal health services can produce substantial gains. Countries already near the top have less room to improve. Economic growth may also be concentrated among certain industries or groups, so a higher GDP does not automatically mean that most people receive better health care. The figure therefore suggests that how resources are used may matter as much as how quickly the economy grows.\n\n\nCode\nchanges &lt;- panel |&gt;\n  filter(year %in% c(2000, 2023)) |&gt;\n  pivot_wider(\n    names_from = year,\n    values_from = c(gdp_per_capita, life_expectancy)\n  ) |&gt;\n  mutate(\n    gdp_growth_pct =\n      (gdp_per_capita_2023 / gdp_per_capita_2000 - 1) * 100,\n    life_gain = life_expectancy_2023 - life_expectancy_2000\n  )\n\ncor(changes$gdp_growth_pct, changes$life_gain, use = \"complete.obs\")"
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#takeaway",
+    "href": "blog/posts/post4/index.html#takeaway",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Takeaway",
+    "text": "Takeaway\nThe figures tell a more complicated story than “richer countries live longer.” Income and life expectancy are closely related, especially among low- and middle-income countries, but the relationship becomes weaker at higher income levels. Looking across time, the countries with the fastest economic growth did not consistently achieve the largest gains in life expectancy. Economic growth can provide resources for better health, but improvements also depend on access to medical care, public-health programs, and how widely the benefits of growth are shared. GDP per capita is therefore a useful measure of development, but it does not tell the whole story."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#questions-for-future-research",
+    "href": "blog/posts/post4/index.html#questions-for-future-research",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Questions for future research",
+    "text": "Questions for future research\nThese figures show patterns rather than causal relationships. Two possible explanations could be examined with additional data:\n\nPublic-health investment: Countries that spend more on basic health services may be better able to turn economic growth into longer lives.\nIncome inequality: When the benefits of growth are concentrated among a small share of the population, improvements in national income may not lead to better health for everyone.\n\nFuture research could test these ideas using data on health spending, vaccination, clean-water access, and income inequality."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#data-and-reproducibility",
+    "href": "blog/posts/post4/index.html#data-and-reproducibility",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Data and reproducibility",
+    "text": "Data and reproducibility\nThe data come from the World Bank World Development Indicators and were downloaded through the official API using the WDI R package. The repository includes the data-download script, the analysis and figure script, the saved data, and all three figures. The results are descriptive and should not be interpreted as causal estimates."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html",
+    "href": "blog/posts/post5/index.html",
+    "title": "Where Is America Growing?",
+    "section": "",
+    "text": "POPULATION SHIFT\nBetween 2020 and 2025, U.S. population growth was geographically concentrated rather than evenly distributed. This article asks where counties grew or shrank—and how closely that pattern followed domestic migration."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#why-geography-matters",
+    "href": "blog/posts/post5/index.html#why-geography-matters",
+    "title": "Where Is America Growing?",
+    "section": "Why geography matters",
+    "text": "Why geography matters\nPopulation change affects local tax bases, labor markets, housing demand, school enrollment, and infrastructure needs. A national growth rate hides the fact that one county can be adding residents while another is losing them. Mapping the change lets us see whether growth forms regional clusters rather than isolated local exceptions.\nI use the U.S. Census Bureau’s Vintage 2025 Population Estimates, which provide consistent county population estimates and components of change from 2020 through 2025. County and state geometry comes from the Census Bureau’s 2025 Cartographic Boundary Files. The script downloads both sources directly and joins them using the five-digit county GEOID.\nThe analysis focuses on the contiguous United States so Alaska and Hawaii do not have to be resized or repositioned in ways that obscure distance and area. Their observations remain in the original Census file but are excluded from the processed analytical sample."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#growth-formed-clear-regional-clusters",
+    "href": "blog/posts/post5/index.html#growth-formed-clear-regional-clusters",
+    "title": "Where Is America Growing?",
+    "section": "1. Growth formed clear regional clusters",
+    "text": "1. Growth formed clear regional clusters\n\n\n\n\n\n\n\n\n\nThe first map reports the percentage change in each county’s estimated population between July 2020 and July 2025:\n[ = 100 ( - 1). ]\nGrowth is visibly clustered rather than randomly scattered. A broad arc of faster-growing counties runs through Florida, the Carolinas, Tennessee, Texas, and the Mountain West. Many declining counties appear in parts of the Great Plains, the Mississippi Delta, Appalachia, and the industrial Midwest. Metropolitan edges also often grew faster than nearby central or rural counties, although that pattern is not universal.\nAcross the 3109 counties and county equivalents in the sample, 60% gained population, and the median county grew by 1.1%. Those national summaries are modest, but the map shows why an average is incomplete: fast growth and decline were geographically concentrated.\nAmong counties with at least 20,000 residents, Kaufman County, Texas grew by 42.2%, while Yazoo County, Mississippi changed by -14%. The population cutoff is used only for these examples and the scatterplot labels; the map includes every county and county equivalent in the contiguous states.\nThese clusters matter economically. Sustained population gains can expand the labor force and consumer base but can also increase pressure on housing and infrastructure. Persistent losses can weaken local demand and make it harder to spread the fixed costs of schools, roads, and public services across residents. The map identifies where those pressures are likely to differ; it does not by itself explain why they occurred."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#domestic-migration-followed-much-of-the-same-geography",
+    "href": "blog/posts/post5/index.html#domestic-migration-followed-much-of-the-same-geography",
+    "title": "Where Is America Growing?",
+    "section": "2. Domestic migration followed much of the same geography",
+    "text": "2. Domestic migration followed much of the same geography\nPopulation changes through births, deaths, international migration, and movement between U.S. counties. To isolate the last component, I average the Census Bureau’s annual net domestic migration rate from 2020-21 through 2024-25. The rate is measured per 1,000 residents, which makes counties of different sizes comparable.\n\n\n\n\n\n\n\n\n\nThe migration map resembles the growth map in important ways. Many fast-growing counties in Florida, Texas, the Carolinas, Tennessee, and the interior West also received more residents from elsewhere in the country than they lost. Conversely, several counties around large urban centers and across northern regions recorded net domestic outflows.\nBut the two maps are not identical. A county can lose residents to other U.S. counties and still grow through international migration or natural increase (births minus deaths). It can also attract domestic migrants without growing rapidly if deaths exceed births. Domestic migration is therefore one mechanism in the population accounting identity, not a complete explanation of county growth."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#migration-explains-much-of-the-pattern-but-not-all-of-it",
+    "href": "blog/posts/post5/index.html#migration-explains-much-of-the-pattern-but-not-all-of-it",
+    "title": "Where Is America Growing?",
+    "section": "3. Migration explains much of the pattern, but not all of it",
+    "text": "3. Migration explains much of the pattern, but not all of it\n\n\n\n\n\n\n\n\n\nFor counties with at least 20,000 residents, the correlation between the average annual domestic migration rate and five-year population growth is 0.84. The upward-sloping fitted line summarizes the relationship: counties with larger domestic inflows generally grew faster.\nThe cutoff reduces extreme percentage changes caused by very small denominators, but it does not change the mapped sample. Point size represents 2025 population, and color identifies the Census region. The regional colors reinforce what the maps show: many Southern and Western counties occupy the upper-right portion of the plot, while many Northeastern and Midwestern counties fall closer to zero growth or into the outflow half.\nThe remaining vertical spread is substantively important. Counties with similar domestic migration rates can have different overall growth because international migration and natural change also differ. The fitted line is descriptive and should not be interpreted as a causal effect of migration: employment growth, housing supply, amenities, taxes, climate, and population movement may influence one another."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#takeaway",
+    "href": "blog/posts/post5/index.html#takeaway",
+    "title": "Where Is America Growing?",
+    "section": "Takeaway",
+    "text": "Takeaway\nU.S. population change from 2020 to 2025 formed clear regional clusters. Growth concentrated across much of the South and Mountain West, while decline was common in parts of the Midwest, Great Plains, Appalachia, and Mississippi Delta. Domestic migration reinforced that redistribution without fully determining it.\nFor policymakers and local businesses, the implication is practical: places gaining residents may need more housing and infrastructure, while places losing residents face the difficult task of sustaining services and opportunity with fewer people."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#methods-limitations-and-reproducibility",
+    "href": "blog/posts/post5/index.html#methods-limitations-and-reproducibility",
+    "title": "Where Is America Growing?",
+    "section": "Methods, limitations, and reproducibility",
+    "text": "Methods, limitations, and reproducibility\nAll results are generated by analysis.R. The script downloads the Census CSV and KML files, retains county-level observations, calculates five-year population growth and annualized component rates, parses geographic coordinates, applies an equal-area Albers projection, joins attributes to boundaries by GEOID, and saves every figure and processed file.\nMap colors are capped at -5% to 15% for population change and -15 to 30 per 1,000 for domestic migration so a few extreme counties do not flatten meaningful variation elsewhere. Capping affects only the displayed color; the processed CSV preserves exact values. Cartographic boundaries are simplified for national-scale mapping and should not be used for surveying or parcel-level work.\nPopulation estimates are revised with each annual vintage, so later downloads may produce slightly different values. Estimates are not exact headcounts, and county-level patterns do not describe every neighborhood or household within a county. The analysis covers 2020-2025 and should not be treated as evidence about longer-run trends without examining earlier periods.\n\nData accessed: October 18, 2026. Sources: U.S. Census Bureau Population Estimates Program and 2025 Cartographic Boundary Files. See the README for exact replication and GitHub Pages instructions."
+  },
+  {
+    "objectID": "blog/posts/post5/SUBMISSION.html",
+    "href": "blog/posts/post5/SUBMISSION.html",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "Before submitting, confirm the author name in index.qmd and render the webpage one final time.\n\n\n\nPush this repository to GitHub.\nOpen Settings &gt; Pages.\nUnder Build and deployment, select Deploy from a branch.\nSelect the main branch and /docs folder, then save.\nOpen the published URL and confirm that all four figures load.\n\nSubmit both the published blog URL and the GitHub repository URL.\n\n\n\n\nThe introduction states a substantive geographic question and motivation.\nGIS methods and rate transformations are explained for a first-time reader.\nEvery visual is interpreted and the article ends with a clear takeaway.\nOfficial Census sources, units, projection, and map notes are documented.\nThe repository has a clear structure and exact replication instructions.\nDownloads, transformations, joins, maps, and webpage are generated by code.\nAppropriate county-level population and geographic data are used.\nTwo substantive county maps are central to the analysis.\nMaps use a legible equal-area projection and meaningful diverging scales.\nThe article explains the economic meaning and limitations of spatial patterns instead of merely describing colors."
+  },
+  {
+    "objectID": "blog/posts/post5/SUBMISSION.html#publish-with-github-pages",
+    "href": "blog/posts/post5/SUBMISSION.html#publish-with-github-pages",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "Push this repository to GitHub.\nOpen Settings &gt; Pages.\nUnder Build and deployment, select Deploy from a branch.\nSelect the main branch and /docs folder, then save.\nOpen the published URL and confirm that all four figures load.\n\nSubmit both the published blog URL and the GitHub repository URL."
+  },
+  {
+    "objectID": "blog/posts/post5/SUBMISSION.html#rubric-cross-check",
+    "href": "blog/posts/post5/SUBMISSION.html#rubric-cross-check",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "The introduction states a substantive geographic question and motivation.\nGIS methods and rate transformations are explained for a first-time reader.\nEvery visual is interpreted and the article ends with a clear takeaway.\nOfficial Census sources, units, projection, and map notes are documented.\nThe repository has a clear structure and exact replication instructions.\nDownloads, transformations, joins, maps, and webpage are generated by code.\nAppropriate county-level population and geographic data are used.\nTwo substantive county maps are central to the analysis.\nMaps use a legible equal-area projection and meaningful diverging scales.\nThe article explains the economic meaning and limitations of spatial patterns instead of merely describing colors."
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html",
+    "href": "blog/posts/post4/index_副本.html",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "",
+    "text": "Money seems to buy longer lives, but only up to a point. Across 153 countries in 2023, richer countries generally had higher life expectancy. Yet countries that experienced the fastest economic growth since 2000 did not necessarily make the largest gains in longevity. Using World Bank data, I examine how the relationship differs when countries are compared at one point in time versus followed over time.This question matters because rising income is often treated as a sign that people’s lives are improving. But if countries can become richer without seeing similar gains in life expectancy, income alone may not tell us enough about their progress."
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#income-and-health",
+    "href": "blog/posts/post4/index_副本.html#income-and-health",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "",
+    "text": "Money seems to buy longer lives, but only up to a point. Across 153 countries in 2023, richer countries generally had higher life expectancy. Yet countries that experienced the fastest economic growth since 2000 did not necessarily make the largest gains in longevity. Using World Bank data, I examine how the relationship differs when countries are compared at one point in time versus followed over time.This question matters because rising income is often treated as a sign that people’s lives are improving. But if countries can become richer without seeing similar gains in life expectancy, income alone may not tell us enough about their progress."
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#data-and-method",
+    "href": "blog/posts/post4/index_副本.html#data-and-method",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Data and method",
+    "text": "Data and method\nI use three indicators from the World Bank World Development Indicators: life expectancy at birth, total population, and GDP per capita at purchasing-power parity. GDP is measured in constant 2021 international dollars. This adjusts for inflation and differences in price levels, making cross-country and over-time comparisons more meaningful than values measured in current U.S. dollars.\nThe data were downloaded through the official World Bank API with the WDI R package. I compare 2000 with 2023, the latest year with broad coverage across all three measures. World Bank regional aggregates are removed. For the scatterplots, I keep countries with at least one million residents in 2023 so that very small economies do not dominate the visual comparison. The repository preserves the raw download, metadata, validation results, cleaned data, and complete R scripts.\n\n\nCode\n# Download the indicators from the World Bank API\nwdi_raw &lt;- WDI(\n  country = \"all\",\n  indicator = c(\n    gdp_per_capita = \"NY.GDP.PCAP.PP.KD\",\n    life_expectancy = \"SP.DYN.LE00.IN\",\n    population = \"SP.POP.TOTL\"\n  ),\n  start = 2000,\n  end = 2023,\n  extra = TRUE\n)\n\npanel &lt;- wdi_raw |&gt;\n  filter(region != \"Aggregates\") |&gt;\n  arrange(country, year)"
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#richer-countries-tend-to-live-longer",
+    "href": "blog/posts/post4/index_副本.html#richer-countries-tend-to-live-longer",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Richer countries tend to live longer",
+    "text": "Richer countries tend to live longer\n\n\n\nGDP per capita and life expectancy across countries in 2023. Bubble size represents population and color represents World Bank region.\n\n\nThe first figure shows a strong positive relationship between income and life expectancy. Across the 153 countries in the 2023 sample, the correlation between log GDP per capita and life expectancy is 0.88. However, the pattern begins to flatten at higher income levels. Moving from a low-income to a middle-income country is associated with a large difference in life expectancy, while income differences among wealthier countries are associated with much smaller gaps.\nThe colors also show that countries from the same region tend to cluster together. Regional differences explain part of the overall pattern, but they do not fully account for it: income and life expectancy are still positively related within most regions.\nThe United States stands out. Although it has one of the highest levels of GDP per capita, its life expectancy is lower than that of several less wealthy countries. This suggests that economic resources can support better health, but higher income does not automatically translate into longer lives.\n\n\nCode\nlatest &lt;- panel |&gt;\n  filter(year == 2023, population &gt;= 1e6) |&gt;\n  drop_na(gdp_per_capita, life_expectancy)\n\nggplot(latest, aes(gdp_per_capita, life_expectancy)) +\n  geom_point(aes(size = population, color = region), alpha = 0.72) +\n  scale_x_log10(labels = scales::label_dollar()) +\n  labs(\n    x = \"GDP per capita, constant 2021 international dollars\",\n    y = \"Life expectancy at birth (years)\"\n  )"
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#progress-differed-across-large-countries",
+    "href": "blog/posts/post4/index_副本.html#progress-differed-across-large-countries",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Progress differed across large countries",
+    "text": "Progress differed across large countries\n\n\n\nLife expectancy in 2000 and 2023 for the ten most populous countries. Labels show the change in years.\n\n\nLife expectancy increased in all ten of the most populous countries between 2000 and 2023, although the size of the increase varied considerably. The median gain was 6.0 years. Bangladesh gained about 12.6 years and India gained about 9.3 years, while the United States gained only about 1.7 years. These differences show that improvements in health were far from equal across countries."
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#growth-alone-does-not-explain-health-gains",
+    "href": "blog/posts/post4/index_副本.html#growth-alone-does-not-explain-health-gains",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Growth alone does not explain health gains",
+    "text": "Growth alone does not explain health gains\n\n\n\nChanges in real GDP per capita and life expectancy from 2000 to 2023. The dashed line is a linear fit.\n\n\nThe third figure shows almost no relationship between income growth and improvements in life expectancy. Across 151 countries, the correlation is only 0.04, meaning that the countries with the fastest economic growth were not necessarily the ones with the largest gains in longevity. China, for example, experienced rapid income growth but a more moderate increase in life expectancy, while several African countries added many years of life with much smaller increases in income.\nOne possible explanation is that health improvements do not always require equally large increases in national income. In countries starting with lower life expectancy, wider access to vaccines, clean water, basic medical care, and maternal health services can produce substantial gains. Countries already near the top have less room to improve. Economic growth may also be concentrated among certain industries or groups, so a higher GDP does not automatically mean that most people receive better health care. The figure therefore suggests that how resources are used may matter as much as how quickly the economy grows.\n\n\nCode\nchanges &lt;- panel |&gt;\n  filter(year %in% c(2000, 2023)) |&gt;\n  pivot_wider(\n    names_from = year,\n    values_from = c(gdp_per_capita, life_expectancy)\n  ) |&gt;\n  mutate(\n    gdp_growth_pct =\n      (gdp_per_capita_2023 / gdp_per_capita_2000 - 1) * 100,\n    life_gain = life_expectancy_2023 - life_expectancy_2000\n  )\n\ncor(changes$gdp_growth_pct, changes$life_gain, use = \"complete.obs\")"
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#questions-for-future-research",
+    "href": "blog/posts/post4/index_副本.html#questions-for-future-research",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Questions for future research",
+    "text": "Questions for future research\nThese figures show patterns rather than causal relationships. Two possible explanations could be examined with additional data:\n\nPublic-health investment: Countries that spend more on basic health services may be better able to turn economic growth into longer lives.\nIncome inequality: When the benefits of growth are concentrated among a small share of the population, improvements in national income may not lead to better health for everyone.\n\nFuture research could test these ideas using data on health spending, vaccination, clean-water access, and income inequality."
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#takeaway",
+    "href": "blog/posts/post4/index_副本.html#takeaway",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Takeaway",
+    "text": "Takeaway\nThe figures tell a more complicated story than “richer countries live longer.” Income and life expectancy are closely related, especially among low- and middle-income countries, but the relationship becomes weaker at higher income levels. Looking across time, the countries with the fastest economic growth did not consistently achieve the largest gains in life expectancy. Economic growth can provide resources for better health, but improvements also depend on access to medical care, public-health programs, and how widely the benefits of growth are shared. GDP per capita is therefore a useful measure of development, but it does not tell the whole story."
+  },
+  {
+    "objectID": "blog/posts/post4/index_副本.html#data-and-reproducibility",
+    "href": "blog/posts/post4/index_副本.html#data-and-reproducibility",
+    "title": "Does Getting Richer Buy Longer Lives?",
+    "section": "Data and reproducibility",
+    "text": "Data and reproducibility\nThe data come from the World Bank World Development Indicators and were downloaded through the official API using the WDI R package. The repository includes the data-download script, the analysis and figure script, the saved data, and all three figures. The results are descriptive and should not be interpreted as causal estimates."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#section",
+    "href": "blog/posts/post5/index.html#section",
+    "title": "Where Is America Growing?",
+    "section": "60%",
+    "text": "60%\nof counties gained population"
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#section-1",
+    "href": "blog/posts/post5/index.html#section-1",
+    "title": "Where Is America Growing?",
+    "section": "1.1%",
+    "text": "1.1%\nmedian county population growth"
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#section-2",
+    "href": "blog/posts/post5/index.html#section-2",
+    "title": "Where Is America Growing?",
+    "section": "0.84",
+    "text": "0.84\ncorrelation between domestic migration and growth"
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#growth-concentrated-in-the-south-and-mountain-west",
+    "href": "blog/posts/post5/index.html#growth-concentrated-in-the-south-and-mountain-west",
+    "title": "Where Is America Growing?",
+    "section": "Growth concentrated in the South and Mountain West",
+    "text": "Growth concentrated in the South and Mountain West\n\n\n\n\n\n\n\n\n\n\n\nThe map shows a broad arc of faster-growing counties through Florida, the Carolinas, Tennessee, Texas, and the Mountain West. Declines were more common in parts of the Great Plains, the Mississippi Delta, Appalachia, and the industrial Midwest. Among counties with at least 20,000 residents, Kaufman County, Texas grew by 42.2%, while Yazoo County, Mississippi changed by -14%.\nA national average misses this divide. Population gains can widen a local labor force and consumer base, but also intensify pressure on housing, schools, and infrastructure. Persistent decline creates the opposite challenge: maintaining services with a smaller tax base and population."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#domestic-migration-reinforced-the-same-geography",
+    "href": "blog/posts/post5/index.html#domestic-migration-reinforced-the-same-geography",
+    "title": "Where Is America Growing?",
+    "section": "Domestic migration reinforced the same geography",
+    "text": "Domestic migration reinforced the same geography\n\n\n\n\n\n\n\n\n\n\n\nMany counties that grew quickly also received more residents from elsewhere in the United States than they lost. The strongest shared pattern appears across Florida, Texas, the Carolinas, Tennessee, and the interior West. Several counties around large urban centers and in northern regions instead recorded domestic outflows.\nMigration is not the full explanation. A county can lose domestic residents yet grow through international migration or natural increase; it can also receive domestic migrants but grow slowly when deaths exceed births. Domestic migration is one important component of population change, not a causal explanation by itself."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#migration-matteredbut-did-not-determine-every-outcome",
+    "href": "blog/posts/post5/index.html#migration-matteredbut-did-not-determine-every-outcome",
+    "title": "Where Is America Growing?",
+    "section": "Migration mattered—but did not determine every outcome",
+    "text": "Migration mattered—but did not determine every outcome\n\n\n\n\n\n\n\n\n\n\n\nFor counties with at least 20,000 residents, the correlation between average annual domestic migration and five-year population growth is 0.84. Counties receiving more domestic migrants generally grew faster, and many Southern and Western counties sit in the upper-right part of the figure.\nThe remaining spread matters. Counties with similar migration rates can have different growth outcomes because international migration and natural change also vary. The fitted line is descriptive—not causal. Housing supply, jobs, amenities, taxes, climate, and migration can all influence one another."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#methods-and-limitations",
+    "href": "blog/posts/post5/index.html#methods-and-limitations",
+    "title": "Where Is America Growing?",
+    "section": "Methods and limitations",
+    "text": "Methods and limitations\nI use the U.S. Census Bureau’s Vintage 2025 Population Estimates and 2025 Cartographic Boundary Files. The reproducible script downloads both sources, joins population data to counties with the five-digit GEOID, and analyzes the contiguous United States. Alaska and Hawaii are excluded from the maps so they do not need to be resized or repositioned.\nPopulation growth is the percentage change between July 2020 and July 2025. Domestic migration is the average annual net domestic migration rate from 2020-21 through 2024-25, reported per 1,000 residents so counties of different sizes are comparable. Map colors are capped at -5% to 15% for growth and -15 to 30 per 1,000 for migration; capping affects only the display, not the underlying data.\nThese are Census estimates, not exact headcounts, and they are revised by later vintages. County averages can hide substantial differences within counties. The article describes patterns over 2020-2025; it does not establish that migration causes population growth.\n\nData accessed: October 18, 2026. Sources: U.S. Census Bureau Population Estimates Program and 2025 Cartographic Boundary Files. See the README for exact replication instructions."
+  },
+  {
+    "objectID": "blog/posts/post5/index.html#the-exceptions-reveal-what-migration-alone-misses",
+    "href": "blog/posts/post5/index.html#the-exceptions-reveal-what-migration-alone-misses",
+    "title": "Where Is America Growing?",
+    "section": "The exceptions reveal what migration alone misses",
+    "text": "The exceptions reveal what migration alone misses\n\n\n\n\n\n\n\n\n\n\n\nThe first three counties show the dominant pattern: strong domestic inflows were the largest source of population growth. Kaufman County, Texas; Pinal County, Arizona; and Horry County, South Carolina all gained residents primarily through movement from elsewhere in the United States.\nMiami-Dade County, Florida and Harris County, Texas show why the migration map cannot be read alone. Both experienced domestic outflows, but international migration and natural increase more than offset those losses. St. Louis city, Missouri provides the opposite case: domestic outflow was not offset by the other components, producing an overall decline. These examples make the central point more precise—domestic migration is a powerful contributor to geographic redistribution, but total population change has multiple sources."
   }
 ]
