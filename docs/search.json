@@ -46,7 +46,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Where Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+    "text": "Why One Year of Income Can Mislead\n\n\nMatching parents and children with SQL in Python\n\n\n\n\n\n\n\n\nOct 22, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post2/index.html",
@@ -453,5 +453,124 @@
     "title": "Where Is America Growing?",
     "section": "The exceptions reveal what migration alone misses",
     "text": "The exceptions reveal what migration alone misses\n\n\n\n\n\n\n\n\n\n\n\nThe first three counties show the dominant pattern: strong domestic inflows were the largest source of population growth. Kaufman County, Texas; Pinal County, Arizona; and Horry County, South Carolina all gained residents primarily through movement from elsewhere in the United States.\nMiami-Dade County, Florida and Harris County, Texas show why the migration map cannot be read alone. Both experienced domestic outflows, but international migration and natural increase more than offset those losses. St. Louis city, Missouri provides the opposite case: domestic outflow was not offset by the other components, producing an overall decline. These examples make the central point more precise—domestic migration is a powerful contributor to geographic redistribution, but total population change has multiple sources."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html",
+    "href": "blog/posts/post6/index.html",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "",
+    "text": "INTERGENERATIONAL MOBILITY\nHow much of the income gap between parents carries into the next generation? The intergenerational elasticity of income (IGE) summarizes that persistence. An IGE of 0.20 means that a 10% difference in parental earnings is associated with about a 2% difference in child earnings. Estimating the regression is straightforward; constructing a valid parent-child sample and measuring long-run income are harder.\nThis tutorial uses public-use data from the Panel Study of Income Dynamics (PSID) and runs SQL inside Python. The PSID has followed U.S. families and their descendants since 1968. Its Parent Identification File supplies biological-parent IDs, while the Cross-year Individual File supplies birth years and repeated earnings observations."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#section",
+    "href": "blog/posts/post6/index.html#section",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "1,054",
+    "text": "1,054\nmatched observations"
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#section-1",
+    "href": "blog/posts/post6/index.html#section-1",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "0.141",
+    "text": "0.141\nsingle-year IGE"
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#section-2",
+    "href": "blog/posts/post6/index.html#section-2",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "0.227",
+    "text": "0.227\nmulti-year IGE"
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#step-1-match-parents-and-children",
+    "href": "blog/posts/post6/index.html#step-1-match-parents-and-children",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Step 1: Match parents and children",
+    "text": "Step 1: Match parents and children\nPSID identifies each person with a 1968 family ID plus a person number. The parent_links table contains a child’s ID, a biological parent’s ID, and whether that parent is the mother or father.\nmatch_query = \"\"\"\nSELECT\n    l.child_id,\n    l.parent_id,\n    l.parent_type,\n    c.birth_year AS child_birth_year,\n    p.birth_year AS parent_birth_year\nFROM parent_links AS l\nJOIN people AS c ON l.child_id = c.person_id\nJOIN people AS p ON l.parent_id = p.person_id\nWHERE c.birth_year BETWEEN 1945 AND 1972\n  AND p.birth_year &lt; c.birth_year - 12;\n\"\"\"\n\nmatches = pd.read_sql_query(match_query, conn)\nmatches.to_sql(\"matches\", conn, index=False, if_exists=\"replace\")\nSELECT chooses the returned columns. The first JOIN attaches the child’s characteristics, and the second attaches the parent’s. The ON clauses use stable individual identifiers rather than names or current household membership. The age-gap condition removes clearly invalid links, while the parent-type field keeps the relationship auditable."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#step-2-aggregate-annual-income",
+    "href": "blog/posts/post6/index.html#step-2-aggregate-annual-income",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Step 2: Aggregate annual income",
+    "text": "Step 2: Aggregate annual income\nThe matched IDs are joined to the income table. The query uses separate common table expressions for parents and children so that repeated observations do not create a many-to-many row explosion.\nincome_query = \"\"\"\nWITH parent_measures AS (\n  SELECT m.family_id, m.parent_id,\n    MAX(CASE WHEN i.year = 2000 THEN i.income END)\n      AS parent_income_single,\n    AVG(CASE WHEN i.year BETWEEN 1998 AND 2002 THEN i.income END)\n      AS parent_income_multi\n  FROM matches AS m\n  JOIN income AS i ON m.parent_id = i.person_id\n  GROUP BY m.family_id, m.parent_id\n),\nchild_measures AS (\n  SELECT m.family_id, m.child_id,\n    MAX(CASE WHEN i.year = 2000 THEN i.income END)\n      AS child_income_single,\n    AVG(CASE WHEN i.year BETWEEN 2006 AND 2010 THEN i.income END)\n      AS child_income_multi\n  FROM matches AS m\n  JOIN income AS i ON m.child_id = i.person_id\n  GROUP BY m.family_id, m.child_id\n)\nSELECT p.*, c.child_id, c.child_income_single, c.child_income_multi\nFROM parent_measures AS p\nJOIN child_measures AS c ON p.family_id = c.family_id;\n\"\"\"\n\nmatched_income = pd.read_sql_query(income_query, conn)\nmatched_income.head()\nGROUP BY creates one row per person-family combination. MAX(CASE WHEN ...) is an aggregation that extracts the single qualifying year, while AVG(CASE WHEN ...) averages the selected years. In the multi-year measures, parents are observed at ages 38-42 and children at ages 31-35. The single-year comparison instead measures the parent at age 40 and the child at age 25. The generations need not be observed in the same calendar years; comparable career stages matter more when constructing long-run measures."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#step-3-estimate-the-ige",
+    "href": "blog/posts/post6/index.html#step-3-estimate-the-ige",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Step 3: Estimate the IGE",
+    "text": "Step 3: Estimate the IGE\nPython estimates\n\\[\\log(Y_{child})=\\alpha+\\beta\\log(Y_{parent})+\\varepsilon,\\]\nwhere \\(\\beta\\) is the IGE. HC1 robust standard errors describe sampling uncertainty.\ndef estimate_ige(data, parent_col, child_col):\n    sample = data[[parent_col, child_col]].dropna()\n    x = sm.add_constant(np.log(sample[parent_col]))\n    y = np.log(sample[child_col])\n    return sm.OLS(y, x).fit(cov_type=\"HC1\")\n\n\n\n\n\n\n\n\n\n\nIncome definition\nAges used\nIGE\nRobust SE\n95% CI\n\n\n\n\nSingle year\nParent: child age 14; child: age 25\n0.141\n0.030\n[0.082, 0.200]\n\n\nMulti-year averages\nParent: child ages 10-18; child: ages 30-35\n0.227\n0.029\n[0.170, 0.284]\n\n\n\n\n\n\n\nThe multi-year PSID estimate is steeper than the single-year estimate.\n\n\n\nThe multi-year estimate is about 61% larger. This comparison changes both the child’s age and the number of years averaged, so it should not be interpreted as a pure averaging effect. Instead, it shows how the complete measurement strategy can materially change the mobility estimate."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#why-the-childs-age-matters",
+    "href": "blog/posts/post6/index.html#why-the-childs-age-matters",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Why the child’s age matters",
+    "text": "Why the child’s age matters\n\n\n\n\nThe single-year IGE is unusually low at age 25 and is close to the long-run parameter at later ages.\n\n\n\nIncome at age 25 can be a poor proxy for permanent economic status. People with high eventual earnings may still be in graduate school, training, or low-paid entry positions. Annual earnings also contain temporary bonuses, layoffs, illness, and measurement error. When those early-career or transitory components weaken the observed parent-child relationship, the estimated IGE is biased downward.\nThe age profile makes that mechanism visible. Holding the parental five-year average fixed, the single-year IGE is only 0.183 at age 25 and returns to roughly 0.40 at later ages. Averaging child income across ages 31-35 then removes additional year-to-year noise."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#takeaway",
+    "href": "blog/posts/post6/index.html#takeaway",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Takeaway",
+    "text": "Takeaway\nSQL provides a transparent and reproducible way to link parents and children and aggregate their longitudinal earnings. But a correct match alone does not guarantee a credible mobility estimate. In the common PSID sample, the IGE rises from 0.141 with single-year measures to 0.227 with multi-year measures taken at more representative ages. Reliable mobility analysis therefore requires both careful identifier-based data construction and income measures that approximate long-run economic status."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#methods-and-data-note",
+    "href": "blog/posts/post6/index.html#methods-and-data-note",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Methods and data note",
+    "text": "Methods and data note\nThe analysis is based on unweighted public-use PSID records and should not be read as a nationally representative or causal estimate. Income concepts vary somewhat across the long historical file; the script harmonizes individual money, taxable, labor, and earnings measures and expresses them in 2023 dollars. Raw PSID microdata require free registration and are not redistributed in this repository; exact download and replication instructions are in the README.\n\nData sources: PSID Cross-year Individual and Parent Identification files; BLS CPI-U series CUUR0000SA0. Analysis date: October 21, 2026."
+  },
+  {
+    "objectID": "blog/posts/post6/SUBMISSION.html",
+    "href": "blog/posts/post6/SUBMISSION.html",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "Confirm the author and date in index.qmd.\nRun python3 code/analysis.py to rebuild the simulated data, estimates, and figures.\nRun quarto render index.qmd and inspect the webpage on both desktop and mobile widths.\nConfirm that both figures, the results table, folded code, and mathematical notation display correctly.\n\n\n\n\nThis post already lives at blog/posts/post6/ inside the Jennifer Xu website repository. From the website root, run:\nquarto render\nThen push the repository to GitHub. The blog listing automatically includes posts/**/index.qmd, so Blog 6 should appear without editing blog/index.qmd.\nSubmit both the published Blog 6 URL and the GitHub repository URL.\n\n\n\n\nThe opening states the intergenerational-mobility question and why measurement matters.\nThe tutorial explains the workflow for a reader with basic Python and SQL knowledge.\nResults are interpreted, limitations are explicit, and the article ends with a clear takeaway.\nThe simulated data source, sample design, and analysis date are documented.\nThe repository separates code, data, figures, results, and publication files.\nA fixed seed and one analysis script regenerate all derived files.\nSQL inside Python matches records using individual and family identifiers.\nSELECT, JOIN, GROUP BY, conditional aggregation, and their purposes are explained.\nParent and child income are constructed for single-year and multi-year specifications, and both IGEs are reported.\nThe age-profile figure demonstrates life-cycle bias and the text explains why multi-year averages better represent long-run status."
+  },
+  {
+    "objectID": "blog/posts/post6/SUBMISSION.html#final-checks",
+    "href": "blog/posts/post6/SUBMISSION.html#final-checks",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "Confirm the author and date in index.qmd.\nRun python3 code/analysis.py to rebuild the simulated data, estimates, and figures.\nRun quarto render index.qmd and inspect the webpage on both desktop and mobile widths.\nConfirm that both figures, the results table, folded code, and mathematical notation display correctly."
+  },
+  {
+    "objectID": "blog/posts/post6/SUBMISSION.html#publish-with-the-main-website",
+    "href": "blog/posts/post6/SUBMISSION.html#publish-with-the-main-website",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "This post already lives at blog/posts/post6/ inside the Jennifer Xu website repository. From the website root, run:\nquarto render\nThen push the repository to GitHub. The blog listing automatically includes posts/**/index.qmd, so Blog 6 should appear without editing blog/index.qmd.\nSubmit both the published Blog 6 URL and the GitHub repository URL."
+  },
+  {
+    "objectID": "blog/posts/post6/SUBMISSION.html#rubric-cross-check",
+    "href": "blog/posts/post6/SUBMISSION.html#rubric-cross-check",
+    "title": "Submission checklist",
+    "section": "",
+    "text": "The opening states the intergenerational-mobility question and why measurement matters.\nThe tutorial explains the workflow for a reader with basic Python and SQL knowledge.\nResults are interpreted, limitations are explicit, and the article ends with a clear takeaway.\nThe simulated data source, sample design, and analysis date are documented.\nThe repository separates code, data, figures, results, and publication files.\nA fixed seed and one analysis script regenerate all derived files.\nSQL inside Python matches records using individual and family identifiers.\nSELECT, JOIN, GROUP BY, conditional aggregation, and their purposes are explained.\nParent and child income are constructed for single-year and multi-year specifications, and both IGEs are reported.\nThe age-profile figure demonstrates life-cycle bias and the text explains why multi-year averages better represent long-run status."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#step-0-set-up-python-and-sqlite",
+    "href": "blog/posts/post6/index.html#step-0-set-up-python-and-sqlite",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Step 0: Set up Python and SQLite",
+    "text": "Step 0: Set up Python and SQLite\nThe downloadable PSID files use fixed-width text rather than CSV. The full parser in code/analysis.py reads only the required columns, removes documented missing codes, and converts earnings to 2023 dollars with CPI-U. We then place three tidy tables in an in-memory SQLite database.\nimport sqlite3\n\nimport numpy as np\nimport pandas as pd\nimport statsmodels.api as sm\n\nfrom code.analysis import load_psid_source_files\n\npeople, parent_links, income = load_psid_source_files()\n\nconn = sqlite3.connect(\":memory:\")\npeople.to_sql(\"people\", conn, index=False, if_exists=\"replace\")\nparent_links.to_sql(\"parent_links\", conn, index=False, if_exists=\"replace\")\nincome.to_sql(\"income\", conn, index=False, if_exists=\"replace\")"
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#step-2-construct-income-measures",
+    "href": "blog/posts/post6/index.html#step-2-construct-income-measures",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Step 2: Construct income measures",
+    "text": "Step 2: Construct income measures\nFor each child-year, parental earnings equal the sum of available earnings for linked biological parents. The single-year measure uses parental earnings when the child was 14 and child earnings at age 25. The multi-year measure averages parental earnings while the child was 10-18 and child earnings at ages 30-35. The common sample requires at least five parental years, three adult-child years, and real annual earnings of at least $1,000.\nincome_query = \"\"\"\nWITH parent_year AS (\n  SELECT m.child_id, i.year,\n    SUM(i.income_real) AS parent_income,\n    MAX(i.year - m.child_birth_year) AS child_age\n  FROM matches AS m\n  JOIN income AS i ON m.parent_id = i.person_id\n  WHERE i.income_real &gt;= 1000\n  GROUP BY m.child_id, i.year\n),\nparent_measures AS (\n  SELECT child_id,\n    MAX(CASE WHEN child_age = 14 THEN parent_income END)\n      AS parent_income_single,\n    AVG(CASE WHEN child_age BETWEEN 10 AND 18 THEN parent_income END)\n      AS parent_income_multi,\n    COUNT(DISTINCT CASE WHEN child_age BETWEEN 10 AND 18 THEN year END)\n      AS parent_years\n  FROM parent_year\n  GROUP BY child_id\n)\nSELECT * FROM parent_measures;\n\"\"\"\nGROUP BY creates one record per child-year and then one record per child. SUM() combines earnings across linked parents. MAX(CASE WHEN ...) selects one age, while AVG(CASE WHEN ...) performs the multi-year aggregation. The complete script applies the same logic to adult-child earnings and joins the two measures into a common analysis sample."
+  },
+  {
+    "objectID": "blog/posts/post6/index.html#life-cycle-bias",
+    "href": "blog/posts/post6/index.html#life-cycle-bias",
+    "title": "Why One Year of Income Can Mislead",
+    "section": "Life-cycle bias",
+    "text": "Life-cycle bias\n\n\n\n\nThe single-year IGE generally rises as adult children age.\n\n\n\nTo isolate age more clearly, the age profile holds the multi-year parental measure fixed and re-estimates the IGE using one child earnings observation at each age. The estimate is 0.145 at age 22 and generally rises, reaching 0.286 at age 35. It is not perfectly monotonic because the available sample changes by age and the PSID estimates contain sampling noise.\nEarly-career earnings can be a poor proxy for permanent economic status. Some eventual high earners are still in school, training, or low-paid entry jobs, while layoffs, bonuses, illness, and measurement error create temporary fluctuations. Averaging several observations at more mature ages reduces this noise and better approximates long-run status."
   }
 ]
