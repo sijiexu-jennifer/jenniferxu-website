@@ -9,19 +9,19 @@ format:
     code-summary: "Show code"
 ---
 
-Students are usually told that studying more leads to better grades. Yet a simple regression can tell the opposite story. In my simulated dataset of 3,000 students, one additional hour of weekly study is associated with a **0.018-point decrease** in college GPA. Should students close their textbooks?
+Students are usually told that studying more leads to better grades. Yet in a simulated dataset of 3,000 students, a simple regression gives the opposite result: one additional hour of weekly study is associated with a **0.018-point decrease** in college GPA. Should students close their textbooks?
 
-Not so fast. This surprising result illustrates **omitted variable bias**: a regression coefficient can absorb the influence of an important variable that was left out of the model.
+No. The regression is making the wrong comparison. This surprising result illustrates **omitted variable bias**: when an important factor is missing from a model, its influence can be mistakenly attributed to a variable that remains.
 
-## How the Data Were Simulated
+## The comparison is the problem
 
-I generated 3,000 fictional students using a fixed random seed. Each student was assigned a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. Study time was designed to be higher among students with weaker prior preparation or lower attendance. College GPA was designed to increase with both prior preparation and study time: before applying the 0–4 GPA boundary, one additional weekly study hour contributed 0.075 points. Random noise ensured that students with similar backgrounds did not receive identical outcomes.
+Imagine two students. One entered college with strong academic preparation, studies six hours per week, and earns a high GPA. The other began with weaker preparation, studies fourteen hours because the material takes longer to master, and still earns a lower GPA. Comparing these two students could make studying look harmful, even if an extra hour helps each student.
 
-This design deliberately creates confounding for illustration. It shows how omitted variable bias can arise, but it does not estimate the real-world effect of studying.
+The useful comparison is not simply “students who study more” versus “students who study less.” It is students with similar preparation, attendance, sleep, and stress who differ in study time. Regression controls are an attempt to make that more like-for-like comparison.
 
-## A Misleading First Impression
+## A deliberately misleading dataset
 
-I simulated students' weekly study hours and college GPAs, together with four background characteristics: high school GPA, attendance, sleep, and stress. The simulation deliberately represents a plausible pattern: students with weaker academic preparation tend to study longer because they need more time to master the same material. At the same time, prior preparation directly predicts college GPA.
+I generated 3,000 fictional students with a fixed random seed. Each student has a high school GPA, attendance rate, sleep duration, stress level, weekly study time, and college GPA. The simulation deliberately makes students with weaker prior preparation or lower attendance study longer. At the same time, stronger preparation and more study time both raise college GPA. Before applying the 0–4 GPA boundary, the true effect built into the simulation is **+0.075 GPA points per additional weekly study hour**.
 
 The complete analysis is available in the [reproducible R script](bp1_gpa_ovb.R), and the [simulated dataset](bp1_gpa_simulated_data.csv) contains no real student records.
 
@@ -40,28 +40,30 @@ adjusted_model <- lm(
 
 ![The naive relationship is negative, but the estimated effect becomes positive after student background is taken into account.](bp1_gpa_ovb_figure.png){fig-alt="A scatterplot of study hours and college GPA followed by a coefficient plot comparing naive regression, adjusted regression, double machine learning, and the true simulated effect."}
 
-The red line in the upper panel slopes downward. However, the colors reveal what that line hides: students with lower high school GPAs are concentrated toward the right because they generally study longer, while students with stronger preparation can earn high college GPAs with fewer hours.
+The red line in the upper panel slopes downward because it combines two relationships. Within similar students, more studying helps. Across students, those who begin with weaker preparation tend to study longer and earn lower GPAs. The unadjusted line confuses the second pattern with the first.
 
-## Where the Bias Comes From
+## Omitted variable bias, step by step
 
 Let $Y$ be college GPA, $D$ be study hours, and $A$ be prior academic preparation. The relationship of interest is
 
 $$Y = \beta D + \gamma A + \varepsilon.$$
 
-If preparation is excluded, its influence does not disappear. Instead, some of it enters the estimated coefficient on study hours. Here, preparation raises college GPA but is negatively related to study time. The naive regression therefore mixes the positive effect of studying with the negative association between studying and prior preparation.
+Three facts create the misleading result:
 
-Once I control for observed student characteristics, the estimated effect changes from **−0.018** to **+0.071 GPA points per additional weekly study hour**. The comparison is now between students with similar backgrounds rather than between fundamentally different students.
+1. Prior preparation raises college GPA, so $\gamma$ is positive.
+2. Students with weaker preparation study more, so preparation and study time are negatively related.
+3. If preparation is omitted, the study-time coefficient absorbs part of that negative relationship.
 
-## Where Double Machine Learning Enters
+The simple regression therefore mixes the positive effect of studying with the disadvantage faced by students who need to study longer. After controlling for the observed background variables, the estimate changes from **−0.018** to **+0.071 GPA points** per additional weekly study hour. The adjusted comparison is much closer to the true simulated effect of +0.075.
 
-An ordinary regression requires the analyst to specify how every control variable enters the model. That becomes difficult when there are many controls or nonlinear relationships. **Double machine learning (DML)** uses flexible prediction models to remove the part of both GPA and study time that can be explained by the observed background variables.
+## Where double machine learning helps
 
-First, a machine-learning model predicts GPA from the controls. A second model predicts study hours from the same controls. DML then relates the two sets of unexplained residuals. I used XGBoost with five-fold **cross-fitting**, so each student's residual was produced by a model that was trained on other students. This reduces the risk that overfitting contaminates the final estimate.
+Ordinary regression requires the analyst to specify how every control enters the model. That can be difficult when relationships are nonlinear. **Double machine learning (DML)** uses flexible models to predict both GPA and study time from the background variables, then relates the unexplained parts of the two outcomes.
 
-The DML estimate is **+0.070**, with a 95% confidence interval from **+0.065 to +0.076**. It is close to both the adjusted regression estimate and the true effect of +0.075 used to generate the data.
+I used XGBoost with five-fold **cross-fitting**, meaning that each student's prediction came from a model trained on other students. The DML estimate is **+0.070**, with a 95% confidence interval from **+0.065 to +0.076**. It closely matches the adjusted regression and the true value used in the simulation.
 
-## What DML Cannot Do
+DML still cannot control for information that was never measured. If motivation or family support affects both study time and GPA but is absent from the data, bias may remain.
 
-DML is not a machine that automatically discovers causality. It can flexibly adjust for variables that were measured, but it cannot recover information that was never recorded. If motivation or family support affects both study time and GPA but is absent from the data, the estimate may still be biased.
+## Takeaway
 
-The larger lesson is simple: a regression coefficient does not interpret itself. Before concluding that studying lowers GPA—or that any behavior causes an outcome—we should ask who is being compared and which relevant differences have been left out.
+A regression coefficient depends on **who is being compared**. The negative unadjusted estimate does not show that studying lowers GPA; it shows that students who study for different amounts of time also differ in important ways. Before interpreting any coefficient causally, ask which common causes of the treatment and outcome may have been omitted—and whether the model is making a credible like-for-like comparison.

@@ -2,8 +2,8 @@ library(ggplot2)
 library(scales)
 
 # Input and output folders
-data_dir <- "/Users/xusijie/Desktop/Computational Methods/Blogs/post3/data/derived"
-figure_dir <- "/Users/xusijie/Desktop/Computational Methods/Blogs/post3/figures"
+data_dir <- "data/derived"
+figure_dir <- "figures"
 
 dir.create(
   figure_dir,

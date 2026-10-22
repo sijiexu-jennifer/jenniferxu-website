@@ -26,14 +26,7 @@ I use IPUMS Current Population Survey (CPS) Basic Monthly Samples from January 2
 
 I first calculate a weighted participation rate separately for every month and demographic group. I then average the 12 monthly rates to produce each annual estimate. This gives every month equal influence on the annual number. The extract also contained ASEC supplement records, which I excluded to avoid mixing them with the Basic Monthly samples.
 
-The analysis ends in 2024 because it is the most recent year for which
-the extract contains complete January–December coverage. I exclude 2025
-because the October 2025 CPS was not collected during the federal
-government shutdown, leaving the year incomplete. I also exclude 2026
-because only part of the year was available when the data were downloaded.
-Including either year would make its annual average less comparable with
-the full-year estimates from 2000 through 2024 and could introduce
-seasonal differences.
+The analysis ends in 2024 because it is the latest complete January–December year in the extract. Later years are incomplete and would not be directly comparable with these full-year averages.
 
 For demographic group $g$, year $t$, and month $m$, I calculate the
 weighted labor-force participation rate as
@@ -50,13 +43,12 @@ $$
 \mathrm{WTFINL}_{i}
 \mathbf{1}\!\left(\mathrm{LABFORCE}_{i}\in\{1,2\}\right)
 }
-\times 100.
 $$
 
 Here, $\mathbf{1}(\cdot)$ is an indicator equal to one when the stated
 condition is satisfied and zero otherwise. The numerator is the weighted
 number of people in the labor force, while the denominator is the weighted
-civilian population with a defined labor-force status.
+civilian population with a defined labor-force status. The code stores this rate as a proportion, and the figures display it as a percentage.
 
 The annual participation rate is the average of the 12 monthly estimates:
 

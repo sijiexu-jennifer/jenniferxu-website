@@ -1,0 +1,6 @@
+.DS_Store
+.Rhistory
+data/raw/*.dat
+data/raw/*.dat.gz
+data/raw/*.xml
+!data/raw/README.md

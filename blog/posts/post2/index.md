@@ -14,6 +14,8 @@ execute:
   message: false
 resources:
   - scrape_analyze.R
+  - data/books.csv
+  - data/category_summary.csv
   - data/recommendations.csv
 ---
 
@@ -90,13 +92,13 @@ category_summary |>
 |Science        |    14|       £30.02|           2.93|                  14%|
 |Food and Drink |    30|       £31.83|           2.90|                  13%|
 
-Poetry ranks first: 21% of its listings clear both hurdles, compared with 8% catalog-wide. Its median price is £38.77. A shopper who is flexible about genre should start there, then compare the next few categories in the table. Someone choosing a specific title can use the generated [`recommendations.csv`](data/recommendations.csv), which sorts in-stock qualifying books by rating and then price.
+Poetry ranks first under this rule: 21% of its listings clear both hurdles, compared with 8% catalog-wide. Its median price is £38.77. Someone choosing a specific title can use the generated [`recommendations.csv`](data/recommendations.csv), which sorts in-stock qualifying books by rating and then price.
 
-This ranking is descriptive, not a claim that price causes ratings or that star ratings measure literary merit. Books to Scrape also provides no review counts, so a five-star item cannot be weighted by the amount of feedback behind it. Different cutoffs would change the ranking; £20 and four stars simply make the shopping rule explicit and easy to revise in the script.
+That result needs an important qualification. Readers in different genres may use the star scale differently. If poetry readers tend to give generous ratings, Poetry could rank first even when its books are not objectively better values. The catalog also provides no review counts, so a five-star item supported by one rating cannot be distinguished from one supported by hundreds. The analysis therefore identifies where this website **displays** the largest share of low-priced, highly rated listings; it does not prove that Poetry offers greater literary quality. Different price or rating cutoffs would also change the ranking.
 
 ## Takeaway
 
-Web scraping becomes useful when it is tied to a decision rule. Here, [`rvest`](https://rvest.tidyverse.org/) transformed paginated product cards into a clean catalog, while a combined price-and-quality threshold turned that catalog into a browsing recommendation. For a £20 shopper in this simulated store, begin with **Poetry**, where the probability of finding an affordable, highly rated option is greatest among categories with a meaningful selection. The same workflow could be reused on a permitted real catalog—after checking its terms and `robots.txt`—to guide an actual purchase.
+Web scraping becomes useful when it is tied to a transparent decision rule. Here, [`rvest`](https://rvest.tidyverse.org/) transformed paginated product cards into a clean catalog, while a price-and-rating threshold produced a reproducible ranking. If the fictional ratings are accepted at face value, a £20 shopper should browse **Poetry** first. For a real purchasing recommendation, however, I would also collect review counts and test whether rating behavior differs systematically across genres. The same workflow could then be reused on a permitted real catalog—after checking its terms and `robots.txt`.
 
 ## Related research
 

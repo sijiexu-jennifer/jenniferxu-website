@@ -22,15 +22,15 @@ Requirements:
 - R with ggplot2 and scales
 - Quarto to render the post
 
-Run from the repository root:
+Run from this `post3` folder:
 
 ```bash
-python3 scripts/01_process_cps.py \
+python3 scripts/cps.py \
   data/raw/cps_00001.dat \
   data/raw/cps_00001.xml \
   --output data/derived
 
-Rscript scripts/02_make_figures.R
+Rscript scripts/plot.R
 quarto render index.qmd
 ```
 
@@ -43,8 +43,8 @@ The Python script reads the large fixed-width extract in chunks, obtains column 
 ├── index.qmd
 ├── README.md
 ├── scripts/
-│   ├── 01_process_cps.py
-│   └── 02_make_figures.R
+│   ├── cps.py
+│   └── plot.R
 ├── data/
 │   ├── raw/          # Not committed
 │   └── derived/
