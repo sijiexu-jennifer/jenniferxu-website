@@ -3,6 +3,7 @@ title: "One Curve, Four Economies"
 subtitle: "An interactive look at U.S. inflation and unemployment since 2000"
 author: "Jennifer Xu"
 date: "2026-10-26"
+image: figures/post7-preview.png
 categories:
   - Macroeconomics
   - Plotly
@@ -19,8 +20,10 @@ format:
 execute:
   eval: false
 resources:
+  - figures/post7-preview.png
   - figures/interactive_macro_dashboard.html
   - code/analysis.py
+  - code/make_preview.py
   - data/derived/us_macro_monthly.csv
   - results/period_summary.csv
   - results/key_results.csv

@@ -4,6 +4,7 @@ from io import StringIO
 from pathlib import Path
 
 import pandas as pd
+import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import requests
 from plotly.subplots import make_subplots
@@ -271,6 +272,86 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
     return figure
 
 
+def make_preview(data: pd.DataFrame) -> None:
+    """Save a compact static preview for the blog listing page."""
+    period_colors = {
+        "2000–2007": "#8b949e",
+        "2008–2019": "#2a7fa6",
+        "2020–2021": "#f2a34a",
+        "2022–latest": "#d34b5b",
+    }
+
+    plt.rcParams.update({
+        "font.family": "DejaVu Sans",
+        "axes.titleweight": "bold",
+    })
+    fig, ax = plt.subplots(figsize=(12.8, 7.2), dpi=125)
+    background = "#fbfaf7"
+    fig.patch.set_facecolor(background)
+    ax.set_facecolor(background)
+
+    for period, color in period_colors.items():
+        subset = data.loc[data["period"] == period]
+        ax.scatter(
+            subset["unemployment"],
+            subset["inflation"],
+            s=26,
+            alpha=0.72,
+            color=color,
+            edgecolors="white",
+            linewidths=0.35,
+            label=period,
+        )
+
+    ax.set_title(
+        "The Phillips curve shifts across economic eras",
+        loc="left",
+        fontsize=24,
+        color="#243552",
+        pad=26,
+    )
+    ax.text(
+        0,
+        1.015,
+        "Monthly U.S. inflation and unemployment, 2000–2026",
+        transform=ax.transAxes,
+        fontsize=13,
+        color="#68758a",
+        va="bottom",
+    )
+    ax.set_xlabel("Unemployment rate", fontsize=14, color="#243552", labelpad=10)
+    ax.set_ylabel("12-month CPI inflation", fontsize=14, color="#243552", labelpad=10)
+    ax.xaxis.set_major_formatter(lambda value, position: f"{value:.0f}%")
+    ax.yaxis.set_major_formatter(lambda value, position: f"{value:.0f}%")
+    ax.grid(True, color="#e4e9ef", linewidth=1)
+    ax.axhline(0, color="#b8c2cc", linewidth=1.1)
+    ax.set_axisbelow(True)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    ax.tick_params(colors="#40506a", labelsize=12, length=0)
+    ax.legend(
+        loc="upper left",
+        bbox_to_anchor=(0, 0.98),
+        ncol=4,
+        frameon=False,
+        fontsize=11,
+        handletextpad=0.4,
+        columnspacing=1.5,
+    )
+    ax.text(
+        1,
+        -0.16,
+        "Source: FRED · CPIAUCSL, UNRATE, FEDFUNDS",
+        transform=ax.transAxes,
+        ha="right",
+        fontsize=9.5,
+        color="#7a8799",
+    )
+    fig.subplots_adjust(left=0.1, right=0.97, top=0.82, bottom=0.18)
+    fig.savefig(FIGURE_DIR / "post7-preview.png", facecolor=background)
+    plt.close(fig)
+
+
 def save_summary(data: pd.DataFrame) -> pd.DataFrame:
     """Save period-level statistics used in the written interpretation."""
     summary = (
@@ -339,6 +420,7 @@ def main() -> None:
         full_html=True,
         config={"displaylogo": False, "responsive": True},
     )
+    make_preview(data)
     summary = save_summary(data)
     print(summary.to_string(index=False))
 
