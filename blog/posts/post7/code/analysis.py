@@ -71,9 +71,9 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
         "2022–latest": "#d1495b",
     }
     indicators = [
-        ("Inflation (12-month CPI change)", "inflation", "#d1495b"),
-        ("Unemployment rate", "unemployment", "#277da1"),
-        ("Federal funds rate", "fed_funds", "#6f4e7c"),
+        ("Inflation", "inflation", "#d1495b"),
+        ("Unemployment", "unemployment", "#277da1"),
+        ("Fed funds rate", "fed_funds", "#6f4e7c"),
     ]
 
     figure = make_subplots(
@@ -87,6 +87,33 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
         ),
     )
 
+    # The overview uses three continuous traces. Period-specific traces remain
+    # hidden until selected, preventing visual breaks at era boundaries.
+    overview_custom = data[["unemployment", "inflation", "fed_funds"]].to_numpy()
+    for indicator_name, column, color in indicators:
+        figure.add_trace(
+            go.Scatter(
+                x=data["date"],
+                y=data[column],
+                mode="lines",
+                name=indicator_name,
+                legendgroup=indicator_name,
+                showlegend=True,
+                visible=True,
+                line={"color": color, "width": 2.2},
+                customdata=overview_custom,
+                hovertemplate=(
+                    "%{x|%b %Y}<br>"
+                    "Inflation: %{customdata[1]:.1f}%<br>"
+                    "Unemployment: %{customdata[0]:.1f}%<br>"
+                    "Fed funds: %{customdata[2]:.2f}%<extra></extra>"
+                ),
+            ),
+            row=1,
+            col=1,
+        )
+
+    overview_trace_count = len(indicators)
     traces_per_period = 4
     for period_index, period in enumerate(periods):
         subset = data.loc[data["period"] == period]
@@ -99,7 +126,8 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
                     mode="lines",
                     name=indicator_name,
                     legendgroup=indicator_name,
-                    showlegend=period_index == 0,
+                    showlegend=True,
+                    visible=False,
                     line={"color": color, "width": 2.2},
                     customdata=custom,
                     hovertemplate=(
@@ -141,20 +169,23 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
             col=1,
         )
 
-    trace_count = len(periods) * traces_per_period
+    trace_count = overview_trace_count + len(periods) * traces_per_period
+    all_periods_visible = [True] * overview_trace_count
+    for _ in periods:
+        all_periods_visible.extend([False, False, False, True])
     buttons = [
         {
             "label": "All periods",
             "method": "update",
             "args": [
-                {"visible": [True] * trace_count},
+                {"visible": all_periods_visible},
                 {},
             ],
         }
     ]
     for period_index, period in enumerate(periods):
         visible = [False] * trace_count
-        start = period_index * traces_per_period
+        start = overview_trace_count + period_index * traces_per_period
         for index in range(start, start + traces_per_period):
             visible[index] = True
         buttons.append(
@@ -183,7 +214,7 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
             "xanchor": "left",
             "x": 0,
             "font": {"size": 11},
-            "entrywidth": 165,
+            "entrywidth": 125,
             "entrywidthmode": "pixels",
         },
         updatemenus=[
@@ -202,16 +233,6 @@ def make_figure(data: pd.DataFrame) -> go.Figure:
         ],
         annotations=list(figure.layout.annotations)
         + [
-            {
-                "text": "Period",
-                "xref": "paper",
-                "yref": "paper",
-                "x": 0.865,
-                "y": 1.072,
-                "xanchor": "right",
-                "showarrow": False,
-                "font": {"size": 11, "color": "#68758a"},
-            },
             {
                 "text": (
                     "Point color by era: 2000–07 gray · 2008–19 blue · "
