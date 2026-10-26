@@ -46,7 +46,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Why One Year of Income Can Mislead\n\n\nMatching parents and children with SQL in Python\n\n\n\n\n\n\n\n\nOct 22, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+    "text": "One Curve, Four Economies\n\n\nAn interactive look at U.S. inflation and unemployment since 2000\n\n\n\n\n\n\n\n\nOct 26, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy One Year of Income Can Mislead\n\n\nMatching parents and children with SQL in Python\n\n\n\n\n\n\n\n\nOct 22, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post2/index.html",
@@ -607,5 +607,89 @@
     "title": "Why Do Students Who Study More Appear to Have Lower GPAs?",
     "section": "Takeaway",
     "text": "Takeaway\nA regression coefficient depends on who is being compared. The negative unadjusted estimate does not show that studying lowers GPA; it shows that students who study for different amounts of time also differ in important ways. Before interpreting any coefficient causally, ask which common causes of the treatment and outcome may have been omitted—and whether the model is making a credible like-for-like comparison."
+  },
+  {
+    "objectID": "blog/posts/post7/index.html",
+    "href": "blog/posts/post7/index.html",
+    "title": "One Curve, Four Economies",
+    "section": "",
+    "text": "INTERACTIVE MACROECONOMICS\nEconomics textbooks often introduce the Phillips curve as a trade-off: when unemployment is low, employers compete for workers, wages and demand rise, and inflation tends to be higher. Does one stable downward-sloping curve actually describe the United States since 2000?\nThis question matters because policymakers must respond differently to demand-driven inflation than to inflation caused by supply disruptions. I use monthly U.S. data from the Federal Reserve Bank of St. Louis’s FRED database and an interactive Plotly figure to compare four economic periods. The evidence shows that the inflation–unemployment relationship moves rather than remaining fixed."
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#section",
+    "href": "blog/posts/post7/index.html#section",
+    "title": "One Curve, Four Economies",
+    "section": "9.0%",
+    "text": "9.0%\npeak inflation"
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#section-1",
+    "href": "blog/posts/post7/index.html#section-1",
+    "title": "One Curve, Four Economies",
+    "section": "14.8%",
+    "text": "14.8%\npeak unemployment"
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#eras",
+    "href": "blog/posts/post7/index.html#eras",
+    "title": "One Curve, Four Economies",
+    "section": "4 eras",
+    "text": "4 eras\nto compare"
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#how-to-read-the-visualization",
+    "href": "blog/posts/post7/index.html#how-to-read-the-visualization",
+    "title": "One Curve, Four Economies",
+    "section": "How to read the visualization",
+    "text": "How to read the visualization\nThe top panel places three monthly rates on the same percent scale: year-over-year CPI inflation, the unemployment rate, and the effective federal funds rate. Drag across either chart to zoom and double-click to reset. The lower panel places unemployment on the horizontal axis and inflation on the vertical axis; each dot is one month. Hover over a dot to identify its date and policy rate. Use the dropdown to isolate an era.\n\nTry this: Select 2020–2021, hover over the high-unemployment points, and then switch to 2022–latest. The cloud of observations moves sharply even though the axes do not change."
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#building-comparable-monthly-measures",
+    "href": "blog/posts/post7/index.html#building-comparable-monthly-measures",
+    "title": "One Curve, Four Economies",
+    "section": "Building comparable monthly measures",
+    "text": "Building comparable monthly measures\nFRED provides the seasonally adjusted CPI level (CPIAUCSL), seasonally adjusted unemployment rate (UNRATE), and monthly effective federal funds rate (FEDFUNDS). Inflation is calculated as the percentage change in CPI from the same month one year earlier:\n\\[\\text{Inflation}_t = 100\\left(\\frac{CPI_t}{CPI_{t-12}}-1\\right).\\]\nUsing a 12-month change makes each observation comparable to the familiar annual inflation rate and reduces seasonal noise. The three series are merged by month; only months observed in all series enter the visualization. The complete download, transformation, and plotting workflow is in code/analysis.py.\ndata[\"inflation\"] = data[\"cpi\"].pct_change(12) * 100\ncomplete = data.dropna(\n    subset=[\"inflation\", \"unemployment\", \"fed_funds\"]\n)"
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#what-interactivity-reveals",
+    "href": "blog/posts/post7/index.html#what-interactivity-reveals",
+    "title": "One Curve, Four Economies",
+    "section": "What interactivity reveals",
+    "text": "What interactivity reveals\nThe 2000–2007 points occupy a relatively compact region: inflation was usually moderate and unemployment moved within a narrower range. During 2008–2019, the financial crisis pushed unemployment far to the right while inflation weakened. This period most closely resembles the textbook negative relationship, but it does not trace a single line.\nThe 2020–2021 filter reveals why a static overall trend would be misleading. Unemployment jumped to 14.8% in April 2020 while inflation initially fell. As reopening proceeded, unemployment declined and inflation accelerated. Supply-chain disruption, shifts from services toward goods, fiscal support, and reopening demand all changed the location of the relationship. These observations describe a moving economy, not movement along a fixed curve.\nIn 2022–latest, inflation reached 9.0% in June 2022. The federal funds rate then rose rapidly, inflation declined, and unemployment remained comparatively low. That combination is especially difficult to summarize with one downward-sloping line. The dropdown makes this visible: selecting different eras moves the entire point cloud, while hovering shows the month-by-month path behind the averages."
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#interpretation-not-causation",
+    "href": "blog/posts/post7/index.html#interpretation-not-causation",
+    "title": "One Curve, Four Economies",
+    "section": "Interpretation, not causation",
+    "text": "Interpretation, not causation\nThe figure is descriptive. It does not show that low unemployment caused inflation or that interest-rate increases alone caused disinflation. Inflation and unemployment respond simultaneously to monetary policy, fiscal policy, expectations, energy prices, supply constraints, productivity, and global shocks. CPI is also a national average and does not represent every household’s experienced inflation. Finally, the latest observations may be revised.\nThese limitations are important because the apparent relationship can change when an omitted force shifts supply or demand. Treating every point as evidence of the same structural trade-off would confuse correlation with a stable causal mechanism."
+  },
+  {
+    "objectID": "blog/posts/post7/index.html#takeaway",
+    "href": "blog/posts/post7/index.html#takeaway",
+    "title": "One Curve, Four Economies",
+    "section": "Takeaway",
+    "text": "Takeaway\nSince 2000, the United States has not occupied one fixed Phillips curve. The relationship looked different around the financial crisis, the pandemic shutdown and reopening, and the subsequent tightening cycle. Interactivity adds substantive value here: filtering prevents observations from very different regimes from being blended into one average, while hover labels connect unusual points to specific months and policy settings. The practical lesson is that policymakers should diagnose why inflation and unemployment are moving before assuming a historically estimated trade-off still applies.\n\nData sources: U.S. Bureau of Labor Statistics, Consumer Price Index for All Urban Consumers: All Items and Unemployment Rate, retrieved through FRED; Board of Governors of the Federal Reserve System, Federal Funds Effective Rate, retrieved through FRED. Analysis date: October 26, 2026. All code and replication instructions are included with this post."
+  },
+  {
+    "objectID": "blog/posts/post7/SUBMISSION.html",
+    "href": "blog/posts/post7/SUBMISSION.html",
+    "title": "Blog Post 7 submission checklist",
+    "section": "",
+    "text": "States a substantive economic question and motivation.\nExplains the Phillips curve, variables, transformation, and figure for a basic undergraduate reader.\nInterprets results and ends with a clear takeaway.\nDocuments official data sources and labels the visualization.\nUses an organized folder structure and a README with exact replication steps.\nGenerates data, results, and the figure programmatically.\nIncludes a substantive interactive Plotly visualization.\nProvides working hover labels, period filtering, and time zoom.\nUses interactivity to separate economic regimes that a static overall relationship would blend together.\nDiscusses the patterns revealed by the interactive elements and states causal limitations.\n\n\n\n\n\nOpen the rendered page and test every period in the dropdown.\nDrag the time slider and hover over observations in both panels.\nPublish the website.\nPush this folder to the GitHub repository.\nSubmit both the published post URL and repository URL."
+  },
+  {
+    "objectID": "blog/posts/post7/SUBMISSION.html#rubric-coverage",
+    "href": "blog/posts/post7/SUBMISSION.html#rubric-coverage",
+    "title": "Blog Post 7 submission checklist",
+    "section": "",
+    "text": "States a substantive economic question and motivation.\nExplains the Phillips curve, variables, transformation, and figure for a basic undergraduate reader.\nInterprets results and ends with a clear takeaway.\nDocuments official data sources and labels the visualization.\nUses an organized folder structure and a README with exact replication steps.\nGenerates data, results, and the figure programmatically.\nIncludes a substantive interactive Plotly visualization.\nProvides working hover labels, period filtering, and time zoom.\nUses interactivity to separate economic regimes that a static overall relationship would blend together.\nDiscusses the patterns revealed by the interactive elements and states causal limitations."
+  },
+  {
+    "objectID": "blog/posts/post7/SUBMISSION.html#before-submitting",
+    "href": "blog/posts/post7/SUBMISSION.html#before-submitting",
+    "title": "Blog Post 7 submission checklist",
+    "section": "",
+    "text": "Open the rendered page and test every period in the dropdown.\nDrag the time slider and hover over observations in both panels.\nPublish the website.\nPush this folder to the GitHub repository.\nSubmit both the published post URL and repository URL."
   }
 ]

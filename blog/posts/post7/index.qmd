@@ -1,0 +1,97 @@
+---
+title: "One Curve, Four Economies"
+subtitle: "An interactive look at U.S. inflation and unemployment since 2000"
+author: "Jennifer Xu"
+date: "2026-10-26"
+categories:
+  - Macroeconomics
+  - Plotly
+  - Python
+page-layout: article
+navbar: false
+page-footer: false
+format:
+  html:
+    toc: false
+    code-fold: true
+    code-tools: true
+    css: styles.css
+execute:
+  eval: false
+resources:
+  - figures/interactive_macro_dashboard.html
+  - code/analysis.py
+  - data/derived/us_macro_monthly.csv
+  - results/period_summary.csv
+  - results/key_results.csv
+---
+
+::: {.eyebrow}
+INTERACTIVE MACROECONOMICS
+:::
+
+Economics textbooks often introduce the **Phillips curve** as a trade-off: when unemployment is low, employers compete for workers, wages and demand rise, and inflation tends to be higher. Does one stable downward-sloping curve actually describe the United States since 2000?
+
+This question matters because policymakers must respond differently to demand-driven inflation than to inflation caused by supply disruptions. I use monthly U.S. data from the Federal Reserve Bank of St. Louis’s FRED database and an interactive Plotly figure to compare four economic periods. The evidence shows that the inflation–unemployment relationship moves rather than remaining fixed.
+
+::: {.key-numbers}
+::: {.key-number}
+## 9.0%
+peak inflation
+:::
+::: {.key-number}
+## 14.8%
+peak unemployment
+:::
+::: {.key-number}
+## 4 eras
+to compare
+:::
+:::
+
+## How to read the visualization
+
+The top panel places three monthly rates on the same percent scale: year-over-year CPI inflation, the unemployment rate, and the effective federal funds rate. Drag across either chart to zoom and double-click to reset. The lower panel places unemployment on the horizontal axis and inflation on the vertical axis; each dot is one month. Hover over a dot to identify its date and policy rate. Use the dropdown to isolate an era.
+
+::: {.interactive-note}
+**Try this:** Select **2020–2021**, hover over the high-unemployment points, and then switch to **2022–latest**. The cloud of observations moves sharply even though the axes do not change.
+:::
+
+<iframe src="figures/interactive_macro_dashboard.html" title="Interactive dashboard of U.S. inflation, unemployment, and the federal funds rate" loading="lazy"></iframe>
+
+## Building comparable monthly measures
+
+FRED provides the seasonally adjusted CPI level (`CPIAUCSL`), seasonally adjusted unemployment rate (`UNRATE`), and monthly effective federal funds rate (`FEDFUNDS`). Inflation is calculated as the percentage change in CPI from the same month one year earlier:
+
+$$\text{Inflation}_t = 100\left(\frac{CPI_t}{CPI_{t-12}}-1\right).$$
+
+Using a 12-month change makes each observation comparable to the familiar annual inflation rate and reduces seasonal noise. The three series are merged by month; only months observed in all series enter the visualization. The complete download, transformation, and plotting workflow is in `code/analysis.py`.
+
+```python
+data["inflation"] = data["cpi"].pct_change(12) * 100
+complete = data.dropna(
+    subset=["inflation", "unemployment", "fed_funds"]
+)
+```
+
+## What interactivity reveals
+
+The **2000–2007** points occupy a relatively compact region: inflation was usually moderate and unemployment moved within a narrower range. During **2008–2019**, the financial crisis pushed unemployment far to the right while inflation weakened. This period most closely resembles the textbook negative relationship, but it does not trace a single line.
+
+The **2020–2021** filter reveals why a static overall trend would be misleading. Unemployment jumped to 14.8% in April 2020 while inflation initially fell. As reopening proceeded, unemployment declined and inflation accelerated. Supply-chain disruption, shifts from services toward goods, fiscal support, and reopening demand all changed the location of the relationship. These observations describe a moving economy, not movement along a fixed curve.
+
+In **2022–latest**, inflation reached 9.0% in June 2022. The federal funds rate then rose rapidly, inflation declined, and unemployment remained comparatively low. That combination is especially difficult to summarize with one downward-sloping line. The dropdown makes this visible: selecting different eras moves the entire point cloud, while hovering shows the month-by-month path behind the averages.
+
+## Interpretation, not causation
+
+The figure is descriptive. It does **not** show that low unemployment caused inflation or that interest-rate increases alone caused disinflation. Inflation and unemployment respond simultaneously to monetary policy, fiscal policy, expectations, energy prices, supply constraints, productivity, and global shocks. CPI is also a national average and does not represent every household’s experienced inflation. Finally, the latest observations may be revised.
+
+These limitations are important because the apparent relationship can change when an omitted force shifts supply or demand. Treating every point as evidence of the same structural trade-off would confuse correlation with a stable causal mechanism.
+
+## Takeaway
+
+Since 2000, the United States has not occupied one fixed Phillips curve. The relationship looked different around the financial crisis, the pandemic shutdown and reopening, and the subsequent tightening cycle. Interactivity adds substantive value here: filtering prevents observations from very different regimes from being blended into one average, while hover labels connect unusual points to specific months and policy settings. The practical lesson is that policymakers should diagnose **why** inflation and unemployment are moving before assuming a historically estimated trade-off still applies.
+
+::: {.sources}
+**Data sources:** U.S. Bureau of Labor Statistics, [Consumer Price Index for All Urban Consumers: All Items](https://fred.stlouisfed.org/series/CPIAUCSL) and [Unemployment Rate](https://fred.stlouisfed.org/series/UNRATE), retrieved through FRED; Board of Governors of the Federal Reserve System, [Federal Funds Effective Rate](https://fred.stlouisfed.org/series/FEDFUNDS), retrieved through FRED. **Analysis date:** October 26, 2026. All code and replication instructions are included with this post.
+:::
