@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bootstrap Explorer</title>
+  <style>
+    :root{--ink:#17212b;--muted:#64707a;--paper:#fbfaf7;--blue:#4f86c6;--red:#b04a4a;--line:#dfe3e6}
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.45 Inter,system-ui,sans-serif}
+    main{max-width:960px;margin:32px auto;padding:0 22px} h1{margin-bottom:4px} .lead{color:var(--muted);margin-top:0}
+    .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:24px 0;padding:18px;border:1px solid var(--line);border-radius:12px;background:white}
+    label{font-weight:650} input{width:100%;margin-top:8px} output{font-variant-numeric:tabular-nums;color:var(--blue)}
+    button{grid-column:1/-1;border:0;border-radius:8px;background:var(--ink);color:white;padding:11px 16px;font-weight:700;cursor:pointer}
+    canvas{display:block;width:100%;height:430px;background:white;border:1px solid var(--line);border-radius:12px}
+    .stats{display:flex;gap:26px;flex-wrap:wrap;margin:14px 2px;color:var(--muted)} .stats strong{color:var(--ink)}
+    @media(max-width:650px){.controls{grid-template-columns:1fr}.controls button{grid-column:1}}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Bootstrap Explorer</h1>
+  <p class="lead">Draw a fresh synthetic earnings sample, then watch its bootstrap distribution change.</p>
+  <section class="controls">
+    <label>Sample size: <output id="nOut">50</output><input id="n" type="range" min="15" max="200" value="50" step="5"></label>
+    <label>Resamples: <output id="bOut">2000</output><input id="b" type="range" min="250" max="5000" value="2000" step="250"></label>
+    <label>Confidence: <output id="cOut">95%</output><input id="c" type="range" min="80" max="99" value="95" step="1"></label>
+    <button id="run">Draw a new sample and bootstrap it</button>
+  </section>
+  <canvas id="chart" width="920" height="430" aria-label="Histogram of bootstrap sample means"></canvas>
+  <div class="stats"><span>Sample mean: <strong id="mean"></strong></span><span>Bootstrap interval: <strong id="ci"></strong></span><span>True mean: <strong>$1,000</strong></span></div>
+  <p>The dashed blue line marks the sample mean; red lines mark the chosen percentile interval. A larger sample usually makes the distribution narrower. A higher confidence level makes the interval wider.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id), canvas=$('chart'),ctx=canvas.getContext('2d');
+function normal(mu,sd){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return mu+sd*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function quantile(a,q){const s=[...a].sort((x,y)=>x-y),p=(s.length-1)*q,i=Math.floor(p),f=p-i,next=s[i+1]??s[i];return s[i]+(next-s[i])*f}
+function run(){const n=+$('n').value,B=+$('b').value,conf=+$('c').value/100,s=Array.from({length:n},()=>normal(1000,250));const sm=s.reduce((a,b)=>a+b,0)/n,means=[];
+  for(let k=0;k<B;k++){let sum=0;for(let j=0;j<n;j++)sum+=s[Math.floor(Math.random()*n)];means.push(sum/n)}
+  const lo=quantile(means,(1-conf)/2),hi=quantile(means,1-(1-conf)/2);draw(means,sm,lo,hi);$('mean').textContent='$'+sm.toFixed(2);$('ci').textContent='$'+lo.toFixed(2)+' to $'+hi.toFixed(2)}
+function draw(a,sm,loCI,hiCI){const W=canvas.width,H=canvas.height,p={l:68,r:24,t:30,b:55},lo=Math.min(...a),hi=Math.max(...a),bins=36,c=Array(bins).fill(0);for(const x of a)c[Math.min(bins-1,Math.floor((x-lo)/(hi-lo)*bins))]++;const max=Math.max(...c),X=x=>p.l+(x-lo)/(hi-lo)*(W-p.l-p.r),Y=y=>H-p.b-y/max*(H-p.t-p.b);
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);ctx.strokeStyle='#dfe3e6';ctx.lineWidth=1;for(let i=0;i<5;i++){const y=p.t+i*(H-p.t-p.b)/4;ctx.beginPath();ctx.moveTo(p.l,y);ctx.lineTo(W-p.r,y);ctx.stroke()}
+  const bw=(W-p.l-p.r)/bins;ctx.fillStyle='#4f86c6';c.forEach((v,i)=>ctx.fillRect(p.l+i*bw+1,Y(v),bw-2,H-p.b-Y(v)));
+  [[loCI,'#b04a4a'],[hiCI,'#b04a4a'],[sm,'#17212b']].forEach(([x,col])=>{ctx.strokeStyle=col;ctx.lineWidth=3;ctx.setLineDash([7,5]);ctx.beginPath();ctx.moveTo(X(x),p.t);ctx.lineTo(X(x),H-p.b);ctx.stroke()});ctx.setLineDash([]);
+  ctx.fillStyle='#56616b';ctx.font='13px system-ui';ctx.textAlign='center';for(let i=0;i<=5;i++){const v=lo+i*(hi-lo)/5,x=X(v);ctx.fillText('$'+v.toFixed(0),x,H-25)}ctx.fillStyle='#17212b';ctx.font='bold 16px system-ui';ctx.fillText('Bootstrap mean weekly earnings',W/2,H-5)}
+['n','b','c'].forEach(id=>$(id).addEventListener('input',()=>{$(id+'Out').textContent=id==='c'?$(id).value+'%':$(id).value}));$('run').addEventListener('click',run);run();
+</script>
+</body>
+</html>

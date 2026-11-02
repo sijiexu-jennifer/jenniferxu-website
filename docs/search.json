@@ -46,7 +46,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "One Curve, Four Economies\n\n\nAn interactive look at U.S. inflation and unemployment since 2000\n\n\n\n\n\n\n\n\nOct 26, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy One Year of Income Can Mislead\n\n\nMatching parents and children with SQL in Python\n\n\n\n\n\n\n\n\nOct 22, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
+    "text": "Does 95% Really Mean 95%?\n\n\nBootstrap confidence intervals and hypothesis tests through simulation\n\n\n\n\n\n\n\n\nNov 2, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nOne Curve, Four Economies\n\n\nAn interactive look at U.S. inflation and unemployment since 2000\n\n\n\n\n\n\n\n\nOct 26, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy One Year of Income Can Mislead\n\n\nMatching parents and children with SQL in Python\n\n\n\n\n\n\n\n\nOct 22, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Is America Growing?\n\n\nDomestic migration is reshaping the geography of U.S. population growth, 2020–2025\n\n\n\n\n\n\n\n\nOct 19, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nDoes Getting Richer Buy Longer Lives?\n\n\nIncome and life expectancy across countries, 2000–2023\n\n\n\n\n\n\n\n\nOct 5, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nHow Has Labor-Force Participation Changed Across Age Groups?\n\n\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Should a Budget-Conscious Reader Browse First?\n\n\nUsing rvest to turn a fictional bookstore catalog into an actionable recommendation\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nJennifer Xu\n\n\n\n\n\n\n\n\n\n\n\n\nWhy Do Students Who Study More Appear to Have Lower GPAs?\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\nJennifer Xu\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post2/index.html",
@@ -691,5 +691,96 @@
     "title": "Blog Post 7 submission checklist",
     "section": "",
     "text": "Open the rendered page and test every period in the dropdown.\nDrag the time slider and hover over observations in both panels.\nPublish the website.\nPush this folder to the GitHub repository.\nSubmit both the published post URL and repository URL."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html",
+    "href": "blog/posts/post8/index.html",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "",
+    "text": "SIMULATION AND INFERENCE\nSuppose a study reports a 95% confidence interval. It is tempting to say that this particular interval has a 95% chance of containing the truth. That interpretation sounds natural, but it is not what frequentist confidence means. The population parameter is fixed; the interval changes from sample to sample.\nI use simulation to make that distinction visible. The setting is deliberately simple: weekly earnings follow a normal distribution with a true mean of $1,000 and a standard deviation of $250. Because the data are synthetic, I know the answer and can check how often the statistical procedure succeeds. I then use the same framework to show how rejection regions and p-values arise from a null distribution."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#section",
+    "href": "blog/posts/post8/index.html#section",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "5,000",
+    "text": "5,000\nbootstrap resamples"
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#section-1",
+    "href": "blog/posts/post8/index.html#section-1",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "94.7%",
+    "text": "94.7%\nsimulated coverage"
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#section-2",
+    "href": "blog/posts/post8/index.html#section-2",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "0.009",
+    "text": "0.009\nempirical p-value"
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#rebuilding-a-sample-from-itself",
+    "href": "blog/posts/post8/index.html#rebuilding-a-sample-from-itself",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "Rebuilding a sample from itself",
+    "text": "Rebuilding a sample from itself\nI first draw a sample of 50 workers. Their average weekly earnings are $975.39. A bootstrap treats that observed sample as a stand-in for the population: draw 50 observations from it with replacement, calculate a new mean, and repeat. The 5,000 resulting means show how much the estimate could vary across similar samples.\nrng = np.random.default_rng(8048)\nsample = rng.normal(1000, 250, 50)\n\nbootstrap_means = rng.choice(\n    sample, size=(5000, 50), replace=True\n).mean(axis=1)\n\nbootstrap_ci = np.quantile(bootstrap_means, [0.025, 0.975])\n\n\n\n\nThe bootstrap distribution is centered near the observed sample mean. Its middle 95% runs from $902.46 to $1,047.27.\n\n\n\nThe percentile interval is [$902.46, $1,047.27]. It contains the true $1,000 mean, but that is not guaranteed. The bootstrap only sees the original observations. If the first sample is unusually high or low, the interval may miss the truth."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#watching-95-coverage-happen",
+    "href": "blog/posts/post8/index.html#watching-95-coverage-happen",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "Watching 95% coverage happen",
+    "text": "Watching 95% coverage happen\nTo evaluate the method rather than one interval, I repeat the entire experiment 2,000 times. Each experiment draws a new sample of 50 workers, performs 999 bootstrap resamples, and constructs a new 95% interval. Green lines in the figure contain the true mean; red lines do not.\n\n\n\n\nMost—but not all—of the repeated 95% confidence intervals contain the true mean.\n\n\n\nAcross all 2,000 experiments, 94.7% of the intervals contain $1,000. This is close to the advertised 95%. Before collecting data, the procedure has about a 95% long-run success rate. After one interval has been calculated, it either contains the fixed parameter or it does not."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#building-a-null-world",
+    "href": "blog/posts/post8/index.html#building-a-null-world",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "Building a null world",
+    "text": "Building a null world\nFor hypothesis testing, suppose the null hypothesis is \\(H_0: \\mu = 950\\). The observed sample has a mean of $1,022.80 and a t statistic of 2.68. I simulate 25,000 samples from a population where the null is true and calculate the same statistic for each one. This creates the distribution of results we would expect if mean weekly earnings really were $950.\n\n\n\n\nThe simulated null distribution identifies both the 5% rejection region and the more extreme outcomes used to calculate the p-value.\n\n\n\nThe outer 5% of the null distribution, beyond approximately ±1.99, is the two-sided rejection region. The observed statistic lies beyond the upper cutoff. Only 0.9% of null simulations are at least as extreme in absolute value, so the empirical p-value is 0.009 and I reject \\(H_0\\) at the 5% level.\nThe p-value is not the probability that the null hypothesis is true. It is the proportion of simulated null outcomes that are at least as incompatible with the null as the observed result."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#change-the-experiment",
+    "href": "blog/posts/post8/index.html#change-the-experiment",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "Change the experiment",
+    "text": "Change the experiment\n\nTry this: Increase the sample size and watch the bootstrap distribution narrow. Then raise the confidence level and see why a more reliable interval must become wider."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#takeaway",
+    "href": "blog/posts/post8/index.html#takeaway",
+    "title": "Does 95% Really Mean 95%?",
+    "section": "Takeaway",
+    "text": "Takeaway\nSimulation separates three ideas that are often blended together. A bootstrap distribution approximates sampling uncertainty using the observed data. A 95% confidence level describes the long-run performance of an interval-building procedure, not the probability attached to one finished interval. A p-value is a tail proportion in a world where the null hypothesis is true. Once those repeated experiments are visible, statistical inference becomes less about memorizing definitions and more about asking what would happen if the study were run again.\n\nData and reproducibility: All observations are synthetic and generated with fixed random seeds; they do not describe an actual workforce. The Python script recreates every result table and figure. Exact replication instructions and statistical definitions are included in the README."
+  },
+  {
+    "objectID": "blog/posts/post8/SUBMISSION.html",
+    "href": "blog/posts/post8/SUBMISSION.html",
+    "title": "Blog Post 8 submission checklist",
+    "section": "",
+    "text": "States the inference question and explains why common interpretations are misleading.\nExplains the methods for a reader with introductory statistics knowledge.\nInterprets each result and ends with a clear takeaway.\nDocuments that the data are synthetic and labels every figure.\nUses separate code, data, figures, interactive, and results folders.\nIncludes complete replication instructions and programmatically generated results.\n\n\n\n\n\nConstructs and visualizes a bootstrap distribution through repeated resampling.\nUses 2,000 repeated experiments to demonstrate approximately 95% coverage.\nSimulates 25,000 test statistics under the null hypothesis.\nExplains rejection regions and empirical p-values using the null-distribution figure.\nIncludes a working interactive demonstration for sample size, resamples, and confidence level.\n\n\n\n\n\nPush the repository to GitHub.\nPublish the Quarto website.\nOpen the public article and test the interactive controls.\nSubmit both the blog-post URL and repository URL."
+  },
+  {
+    "objectID": "blog/posts/post8/SUBMISSION.html#common-criteria",
+    "href": "blog/posts/post8/SUBMISSION.html#common-criteria",
+    "title": "Blog Post 8 submission checklist",
+    "section": "",
+    "text": "States the inference question and explains why common interpretations are misleading.\nExplains the methods for a reader with introductory statistics knowledge.\nInterprets each result and ends with a clear takeaway.\nDocuments that the data are synthetic and labels every figure.\nUses separate code, data, figures, interactive, and results folders.\nIncludes complete replication instructions and programmatically generated results."
+  },
+  {
+    "objectID": "blog/posts/post8/SUBMISSION.html#assignment-specific-criteria",
+    "href": "blog/posts/post8/SUBMISSION.html#assignment-specific-criteria",
+    "title": "Blog Post 8 submission checklist",
+    "section": "",
+    "text": "Constructs and visualizes a bootstrap distribution through repeated resampling.\nUses 2,000 repeated experiments to demonstrate approximately 95% coverage.\nSimulates 25,000 test statistics under the null hypothesis.\nExplains rejection regions and empirical p-values using the null-distribution figure.\nIncludes a working interactive demonstration for sample size, resamples, and confidence level."
+  },
+  {
+    "objectID": "blog/posts/post8/SUBMISSION.html#before-submission",
+    "href": "blog/posts/post8/SUBMISSION.html#before-submission",
+    "title": "Blog Post 8 submission checklist",
+    "section": "",
+    "text": "Push the repository to GitHub.\nPublish the Quarto website.\nOpen the public article and test the interactive controls.\nSubmit both the blog-post URL and repository URL."
   }
 ]
