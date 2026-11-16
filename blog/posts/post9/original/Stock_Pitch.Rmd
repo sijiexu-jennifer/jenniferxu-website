@@ -1,0 +1,262 @@
+# Load libraries
+library(tidyquant)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(GGally)
+
+# Get historical Tesla stock prices (monthly)
+tsla <- tq_get(
+  "TSLA",
+  get = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  tq_transmute(
+    mutate_fun = to.period,
+    period = "months"
+  )
+
+# Plot Tesla's historical stock price
+ggplot(tsla, aes(x = date, y = close)) +
+  geom_line(color = "blue") +
+  labs(
+    title = "Tesla (TSLA) Stock Price History",
+    x = "Date",
+    y = "Closing Price ($)"
+  ) +
+  theme_minimal()
+
+# Get Tesla monthly returns
+tsla_returns <- tq_get(
+  "TSLA",
+  get = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  tq_transmute(
+    select = adjusted,
+    mutate_fun = periodReturn,
+    period = "monthly",
+    col_rename = "monthly_return"
+  )
+# Plot Tesla monthly returns
+ggplot(tsla_returns, aes(x = date, y = monthly_return)) +
+  geom_line() +
+  labs(
+    title = "Tesla (TSLA) Monthly Returns",
+    x = "Date",
+    y = "Monthly Return"
+  ) +
+  theme_minimal()
+
+library(GGally)
+# Define tickers
+tickers <- c("AAPL", "TSLA", "META", "NVDA", "GOOG")
+
+# Get monthly returns for all stocks
+returns_data <- tq_get(
+  tickers,
+  get  = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  group_by(symbol) %>%
+  tq_transmute(
+    select     = adjusted,
+    mutate_fun = periodReturn,
+    period     = "monthly",
+    col_rename = "monthly_return"
+  ) %>%
+  ungroup() %>%
+  tidyr::pivot_wider(
+    names_from  = symbol,
+    values_from = monthly_return
+  )
+
+# Remove rows with missing data (e.g., if any stock has shorter history)
+returns_data_clean <- na.omit(returns_data)
+
+# Correlation scatterplot matrix (visual)
+ggpairs(
+  returns_data_clean[, -1],  # exclude date column
+  title = "Monthly Return Correlation Matrix: AAPL, TSLA, META, NVDA, GOOG"
+)
+
+# Optional: print the correlation matrix (numbers)
+cor_matrix <- cor(returns_data_clean[, -1])
+print(round(cor_matrix, 3))
+
+library(tidyquant)
+library(tidyverse)
+library(ggplot2)
+# Get Tesla monthly returns
+tsla_returns <- tq_get(
+  "TSLA",
+  get = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  tq_transmute(
+    select = adjusted,
+    mutate_fun = periodReturn,
+    period = "monthly",
+    col_rename = "monthly_return"
+  )
+# Risk-free rate
+rf_annual  <- 0.0432
+rf_monthly <- rf_annual / 12
+# Calculate excess returns
+tsla_returns <- tsla_returns %>%
+  mutate(excess_return = monthly_return - rf_monthly)
+
+# Sharpe Ratio
+sharpe_ratio_tsla <- mean(tsla_returns$excess_return, na.rm = TRUE) /
+  sd(tsla_returns$monthly_return, na.rm = TRUE)
+
+# Print result
+print(paste("Tesla Sharpe Ratio:", round(sharpe_ratio_tsla, 3)))
+
+library(tidyquant)
+library(tidyverse)
+# Tesla monthly returns
+tsla <- tq_get(
+  "TSLA",
+  get = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  tq_transmute(
+    select = adjusted,
+    mutate_fun = periodReturn,
+    period = "monthly",
+    col_rename = "tsla_return"
+  )
+# S&P 500 monthly returns
+sp500 <- tq_get(
+  "^GSPC",
+  get = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  tq_transmute(
+    select = adjusted,
+    mutate_fun = periodReturn,
+    period = "monthly",
+    col_rename = "market_return"
+  )
+# Join Tesla and market returns by date
+returns <- left_join(tsla, sp500, by = "date")
+# Risk-free rate
+rf_annual  <- 0.0432
+rf_monthly <- rf_annual / 12
+returns <- returns %>%
+  mutate(
+    excess_tsla   = tsla_return - rf_monthly,
+    excess_market = market_return - rf_monthly
+  )
+# CAPM regression
+capm_model <- lm(excess_tsla ~ excess_market, data = returns)
+
+# Extract alpha and beta
+alpha <- coef(capm_model)[1]
+beta  <- coef(capm_model)[2]
+
+# Print monthly results
+print(paste("Beta:", round(beta, 3)))
+print(paste("Jensen’s Alpha (monthly):", round(alpha, 5)))
+# Annualized Jensen's Alpha
+alpha_annualized <- (1 + alpha)^12 - 1
+
+print(paste("Jensen’s Alpha (annualized):", round(alpha_annualized, 4)))
+
+library(tidyquant)
+library(tidyverse)
+library(dplyr)
+library(quadprog)
+tickers <- c("AAPL", "TSLA", "META", "NVDA", "GOOG")
+returns_data <- tq_get(
+  tickers,
+  get  = "stock.prices",
+  from = "2010-01-01"
+) %>%
+  group_by(symbol) %>%
+  tq_transmute(
+    select     = adjusted,
+    mutate_fun = periodReturn,
+    period     = "monthly",
+    col_rename = "monthly_return"
+  ) %>%
+  ungroup() %>%
+  tidyr::pivot_wider(
+    names_from  = symbol,
+    values_from = monthly_return
+  )
+
+# Remove missing rows
+returns_data_clean <- na.omit(returns_data)
+# Remove date column
+portfolio_returns <- returns_data_clean %>%
+  select(-date)
+
+# Convert to matrix
+R <- as.matrix(portfolio_returns)
+
+# Mean returns and covariance matrix (monthly)
+mu    <- colMeans(R)
+Sigma <- cov(R)
+rf_annual  <- 0.0432
+rf_monthly <- rf_annual / 12
+rf <- rf_monthly
+neg_sharpe <- function(w, mu, Sigma, rf) {
+  w <- w / sum(w)  # enforce weights sum to 1
+  port_return <- sum(w * mu)
+  port_sd     <- sqrt(t(w) %*% Sigma %*% w)
+  - (port_return - rf) / port_sd
+}
+# Initial guess: equal weights
+n_assets <- ncol(R)
+w0 <- rep(1 / n_assets, n_assets)
+
+# Optimization
+opt <- optim(
+  par     = w0,
+  fn      = neg_sharpe,
+  mu      = mu,
+  Sigma  = Sigma,
+  rf      = rf,
+  method  = "L-BFGS-B",
+  lower   = rep(0, n_assets),
+  upper   = rep(1, n_assets)
+)
+weights <- opt$par / sum(opt$par)
+names(weights) <- colnames(R)
+# Total portfolio amount
+total_amount <- 100000
+
+# Convert portfolio weights into dollar amounts
+dollar_amounts <- round(weights * total_amount, 2)
+
+# Correct possible rounding difference so total equals exactly $100,000
+dollar_amounts[length(dollar_amounts)] <-
+  total_amount - sum(dollar_amounts[-length(dollar_amounts)])
+
+# Create allocation table
+allocation_table <- data.frame(
+  Stock = names(weights),
+  Weight = round(weights, 4),
+  Percentage = round(weights * 100, 2),
+  Dollar_Amount = dollar_amounts
+)
+
+print(allocation_table)
+cat("\nTotal Investment: $", sum(allocation_table$Dollar_Amount))
+
+print("Optimal Portfolio Weights (Max Sharpe Ratio):")
+round(weights, 4)
+# Portfolio expected return
+portfolio_return <- sum(weights * mu)
+
+# Portfolio volatility
+portfolio_sd <- sqrt(t(weights) %*% Sigma %*% weights)
+
+# Portfolio Sharpe ratio
+portfolio_sharpe <- (portfolio_return - rf) / portfolio_sd
+
+cat("\nPortfolio Expected Monthly Return:", round(portfolio_return, 4))
+cat("\nPortfolio Monthly Volatility:", round(portfolio_sd, 4))
+cat("\nPortfolio Sharpe Ratio:", round(portfolio_sharpe, 4))

@@ -1,0 +1,3 @@
+portfolio,initial_value,ending_value,return
+Intuition,100000,99093.21,-0.009067899999999907
+Analysis using XGBoost,100000,97108.55,-0.028914499999999954

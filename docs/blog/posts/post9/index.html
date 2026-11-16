@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer Xu">
+<meta name="dcterms.date" content="2026-11-16">
+
+<title>Better Forecasts, Better Investments? – Jennifer Xu</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9d96f532d65220ca877c0304385df42f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Better Forecasts, Better Investments?</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Revisiting our Investopedia experiment with gradient boosting</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Machine Learning</div>
+    <div class="quarto-category">Finance</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jennifer Xu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 16, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="eyebrow">
+<p>STOCK RETURNS AND MACHINE LEARNING</p>
+</div>
+<p>Our classroom project used <strong>Investopedia Simulator</strong> to compare two virtual portfolios, each starting with <strong>$100,000</strong>, over a planned two-month horizon. One used intuition; the other used financial analysis. Our group used the supplied broad-universe XGBoost script for the analytical portfolio. Reported final values were <strong>$99,093.21</strong> and <strong>$97,108.55</strong>: returns of -0.91% and -2.89%. Analysis trailed by 1.98 percentage points. Could a more cautious model improve its predictions and investment decisions?</p>
+<p>The class workbook provides context: analysis finished ahead for 30 of 45 teams, but teams could use different indicators or methods. Without their holdings and exact execution dates, these outcomes cannot isolate XGBoost skill. The historical backtest below is a separate experiment, not a reconstruction of our simulator trades.</p>
+<section id="what-the-classroom-model-actually-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-classroom-model-actually-does">What the classroom model actually does</h2>
+<p>The confirmed script lists <strong>95 stocks across multiple sectors</strong>, despite a comment describing 100. Its recipe retains open, high, low, close, volume, adjusted price, daily return and SPY return, alongside six engineered momentum, volatility and relative-return signals. Stock identity and date are excluded from prediction. The target is adjusted price at t+20 divided by price at t+1, minus one: <strong>19 trading intervals</strong>.</p>
+<p>Gradient boosting adds trees sequentially to correct the existing ensemble. The classroom model uses 300 trees, depth five and learning rate 0.05. It ranks stocks, selects the top ten, and assigns weights proportional to positive forecasts; all-negative selections receive equal weights.</p>
+</section>
+<section id="why-try-a-simpler-model" class="level2">
+<h2 class="anchored" data-anchor-id="why-try-a-simpler-model">Why try a simpler model?</h2>
+<p>The concern is overfitting, not a prior conclusion that the original model fails. Although pooling stocks produces many rows, training covers only 2022-2023; common market shocks and overlapping return windows reduce independent information. Complex trees may learn temporary patterns rather than stable relationships.</p>
+<p>I remove raw price levels and volume, retaining return-based signals and adding stock identity, current-day return, current 21-day momentum, and market momentum and volatility. These provide stock-specific and market context without relying on nominal price scales. Shallower trees allow fewer interacting conditions; smaller updates and stricter split requirements restrain noise fitting.</p>
+<p>Two forward validation blocks in 2023 compare 100 or 300 trees at depth one or two, selecting <strong>100 trees, depth 1</strong>. Learning rate 0.03, minimum child weight 50 and 80% row subsampling are preset conservative choices, not exhaustively tuned. The 2024-2025 test set does not select parameters.</p>
+</section>
+<section id="evaluating-without-looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-without-looking-ahead">Evaluating without looking ahead</h2>
+<p>Yahoo Finance data cover 2022-2025; all 95 requested stocks have complete coverage. The main classroom-model comparator preserves its inputs, formulas and hyperparameters, but removes 1900 training labels whose outcomes cross into 2024. Validation boundaries are purged similarly. A literal classroom-split diagnostic is saved separately.</p>
+<p>Both strategies form signals after close, enter at the next close and hold for 19 intervals. Holdings are contiguous and nonoverlapping. I correct the original scalar <code>ifelse</code> weight-recycling issue so weights sum to one, align SPY holding windows, and use holding-period rather than daily annualization. These shared evaluation repairs are distinct from changing the prediction model.</p>
+</section>
+<section id="what-changed-in-predictive-performance" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-changed-in-predictive-performance">What changed in predictive performance?</h2>
+<p>Across <strong>45,790 held-out stock-date forecasts</strong>, RMSE falls from <strong>8.68</strong> to <strong>8.08 percentage points</strong>. RMSE penalizes large errors. The training-mean benchmark achieves <strong>8.11</strong> points, so improvement over this simple rule is small: out-of-sample R-squared is <strong>0.009</strong>, about 0.9% less squared error. Direction accuracy still trails the always-positive mean forecast. This is limited descriptive evidence, not proof of persistent predictability.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Forecast</th>
+<th style="text-align: right;">RMSE (pp)</th>
+<th style="text-align: right;">MAE (pp)</th>
+<th style="text-align: right;">Direction accuracy</th>
+<th style="text-align: right;">OOS R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Training mean</td>
+<td style="text-align: right;">8.11</td>
+<td style="text-align: right;">5.97</td>
+<td style="text-align: right;">57.19%</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Classroom model, purged</td>
+<td style="text-align: right;">8.68</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">51.74%</td>
+<td style="text-align: right;">-0.145</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Improved XGBoost</td>
+<td style="text-align: right;">8.08</td>
+<td style="text-align: right;">5.96</td>
+<td style="text-align: right;">56.06%</td>
+<td style="text-align: right;">0.009</td>
+</tr>
+</tbody>
+</table>
+<div class="page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="results/figures/01_forecast_error.png" class="img-fluid figure-img column-screen-inset"></p>
+<figcaption>Forecast errors on the same held-out stock-date observations. Daily target windows overlap.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="do-better-forecasts-make-better-investments" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="do-better-forecasts-make-better-investments">Do better forecasts make better investments?</h2>
+<p>Both models retain the top-ten allocation rule. Benchmarks hold the entire stock universe equally weighted, rebalanced on the same dates, or SPY. Costs are <strong>10 basis points per dollar bought or sold</strong>, including initial entry and final liquidation, using drifted pretrade weights. There are 26 holdings, January 3, 2024 through December 22, 2025.</p>
+<p>Net returns are <strong>91.2%</strong> for the classroom model and <strong>78.2%</strong> for the improved model, versus <strong>45.5%</strong> for equal-weight stocks and <strong>49.4%</strong> for SPY. Annualized Sharpe ratios are <strong>1.34</strong> and <strong>1.04</strong>, assuming a fixed 4.32% annual risk-free rate. Better average prediction accuracy did not produce a better portfolio: the strategy depends on ranking and weighting just ten stocks, while RMSE evaluates every forecast.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Strategy</th>
+<th style="text-align: right;">Net total return</th>
+<th style="text-align: right;">Annualized Sharpe</th>
+<th style="text-align: right;">Holding-boundary max drawdown</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Classroom model, purged</td>
+<td style="text-align: right;">91.2%</td>
+<td style="text-align: right;">1.34</td>
+<td style="text-align: right;">-10.0%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Improved</td>
+<td style="text-align: right;">78.2%</td>
+<td style="text-align: right;">1.04</td>
+<td style="text-align: right;">-10.0%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Equal-weight 95 stocks</td>
+<td style="text-align: right;">45.5%</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">-10.7%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SPY</td>
+<td style="text-align: right;">49.4%</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">-12.2%</td>
+</tr>
+</tbody>
+</table>
+<div class="page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="results/figures/02_wealth.png" class="img-fluid figure-img column-screen-inset"></p>
+<figcaption>Growth of $1 after assumed trading costs, using identical execution dates.</figcaption>
+</figure>
+</div>
+</div>
+<div class="page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="results/figures/03_drawdown.png" class="img-fluid figure-img column-screen-inset"></p>
+<figcaption>Drawdowns measured at holding boundaries; losses between boundaries can be deeper.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
+<p>Unexpected news, competition and changing relationships make returns difficult to forecast. The broad input universe does not guarantee a diversified top-ten portfolio; sector and position concentration require the actual holdings. Without simulator trade records, I cannot attribute our classroom loss to technology exposure or an AI-related shock.</p>
+<p>This retrospective test uses a fixed list of surviving companies and only 26 investment periods. Historical adjustments and assumed closing-price execution also limit realism. The more conservative model improves forecast error, but lowers realized return and Sharpe. Model complexity, forecast accuracy and investment usefulness are different questions—and each needs its own benchmark.</p>
+</section>
+<section id="data-and-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-reproducibility">Data and reproducibility</h2>
+<p>Prices: <a href="https://finance.yahoo.com/quote/SPY/history/">Yahoo Finance</a>, retrieved November 16, 2026, archived for 2022-2025. Adjusted close reflects <a href="https://in.help.yahoo.com/kb/adjusted-close-sln28256.html">splits and dividends</a>. See <a href="https://xgboost.readthedocs.io/en/stable/parameter.html">XGBoost parameters</a>.</p>
+<p>The original source is <code>original/instructor_broad_universe_xgboost.R</code>, confirmed as the script used for our simulator project. <code>R_Crash_Course_Assignment.pdf</code> specifies the project design. The earlier five-stock adaptation is retained only as background and is not used for these results. The 113-team example in the assignment describes a previous semester; the supplied workbook contains 45 teams.</p>
+<p><a href="replication.zip">Download the complete replication project</a>, <a href="README.txt">README</a>, <a href="code/analyze.R">analysis code</a>, <a href="results/prediction_metrics.csv">forecast results</a>, <a href="results/investment_metrics.csv">investment results</a>, or <a href="results/weights.csv">portfolio holdings</a>. Source: <a href="https://github.com/sijiexu-jennifer/jenniferxu-website">my website repository</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> code/analyze.R</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> code/classroom.R</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> code/publish.R</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No new download is needed. <code>publish.R</code> generates this Quarto source from saved results; render it in the existing website to retain its established styling. Holdings and entry/exit dates are saved. Sharpe annualization uses 252/19 periods per year; drawdown is sampled at holding ends. Initial and final costs are charged to every strategy. No formal significance or causal-alpha claim is made.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Better Forecasts, Better Investments?"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Revisiting our Investopedia experiment with gradient boosting"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jennifer Xu"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2026-11-16"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> results/figures/01_forecast_error.png</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - Machine Learning</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - Finance</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - R</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> article</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="an">navbar:</span><span class="co"> false</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="an">page-footer:</span><span class="co"> false</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: false</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">    css: styles.css</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="an">resources:</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">  - code/**</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">  - data/**</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">  - results/**</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">  - README.txt</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">  - replication.zip</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>::: {.eyebrow}</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>STOCK RETURNS AND MACHINE LEARNING</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>Our classroom project used **Investopedia Simulator** to compare two virtual portfolios, each starting with **$100,000**, over a planned two-month horizon. One used intuition; the other used financial analysis. Our group used the supplied broad-universe XGBoost script for the analytical portfolio. Reported final values were **$99,093.21** and **$97,108.55**: returns of -0.91% and -2.89%. Analysis trailed by 1.98 percentage points. Could a more cautious model improve its predictions and investment decisions?</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>The class workbook provides context: analysis finished ahead for 30 of 45 teams, but teams could use different indicators or methods. Without their holdings and exact execution dates, these outcomes cannot isolate XGBoost skill. The historical backtest below is a separate experiment, not a reconstruction of our simulator trades.</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## What the classroom model actually does</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>The confirmed script lists **95 stocks across multiple sectors**, despite a comment describing 100. Its recipe retains open, high, low, close, volume, adjusted price, daily return and SPY return, alongside six engineered momentum, volatility and relative-return signals. Stock identity and date are excluded from prediction. The target is adjusted price at t+20 divided by price at t+1, minus one: **19 trading intervals**.</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>Gradient boosting adds trees sequentially to correct the existing ensemble. The classroom model uses 300 trees, depth five and learning rate 0.05. It ranks stocks, selects the top ten, and assigns weights proportional to positive forecasts; all-negative selections receive equal weights.</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why try a simpler model?</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>The concern is overfitting, not a prior conclusion that the original model fails. Although pooling stocks produces many rows, training covers only 2022-2023; common market shocks and overlapping return windows reduce independent information. Complex trees may learn temporary patterns rather than stable relationships.</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>I remove raw price levels and volume, retaining return-based signals and adding stock identity, current-day return, current 21-day momentum, and market momentum and volatility. These provide stock-specific and market context without relying on nominal price scales. Shallower trees allow fewer interacting conditions; smaller updates and stricter split requirements restrain noise fitting.</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>Two forward validation blocks in 2023 compare 100 or 300 trees at depth one or two, selecting **100 trees, depth 1**. Learning rate 0.03, minimum child weight 50 and 80% row subsampling are preset conservative choices, not exhaustively tuned. The 2024-2025 test set does not select parameters.</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Evaluating without looking ahead</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>Yahoo Finance data cover 2022-2025; all 95 requested stocks have complete coverage. The main classroom-model comparator preserves its inputs, formulas and hyperparameters, but removes 1900 training labels whose outcomes cross into 2024. Validation boundaries are purged similarly. A literal classroom-split diagnostic is saved separately.</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>Both strategies form signals after close, enter at the next close and hold for 19 intervals. Holdings are contiguous and nonoverlapping. I correct the original scalar <span class="in">`ifelse`</span> weight-recycling issue so weights sum to one, align SPY holding windows, and use holding-period rather than daily annualization. These shared evaluation repairs are distinct from changing the prediction model.</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## What changed in predictive performance?</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>Across **45,790 held-out stock-date forecasts**, RMSE falls from **8.68** to **8.08 percentage points**. RMSE penalizes large errors. The training-mean benchmark achieves **8.11** points, so improvement over this simple rule is small: out-of-sample R-squared is **0.009**, about 0.9% less squared error. Direction accuracy still trails the always-positive mean forecast. This is limited descriptive evidence, not proof of persistent predictability.</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Forecast <span class="pp">|</span> RMSE (pp) <span class="pp">|</span> MAE (pp) <span class="pp">|</span> Direction accuracy <span class="pp">|</span> OOS R² <span class="pp">|</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>:--<span class="pp">|</span>--:<span class="pp">|</span>--:<span class="pp">|</span>--:<span class="pp">|</span>--:<span class="pp">|</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Training mean <span class="pp">|</span> 8.11 <span class="pp">|</span> 5.97 <span class="pp">|</span> 57.19% <span class="pp">|</span> 0.000 <span class="pp">|</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Classroom model, purged <span class="pp">|</span> 8.68 <span class="pp">|</span> 6.44 <span class="pp">|</span> 51.74% <span class="pp">|</span> -0.145 <span class="pp">|</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Improved XGBoost <span class="pp">|</span> 8.08 <span class="pp">|</span> 5.96 <span class="pp">|</span> 56.06% <span class="pp">|</span> 0.009 <span class="pp">|</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>::: {.column-screen-inset}</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="al">![Forecast errors on the same held-out stock-date observations. Daily target windows overlap.](results/figures/01_forecast_error.png)</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## Do better forecasts make better investments?</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>Both models retain the top-ten allocation rule. Benchmarks hold the entire stock universe equally weighted, rebalanced on the same dates, or SPY. Costs are **10 basis points per dollar bought or sold**, including initial entry and final liquidation, using drifted pretrade weights. There are 26 holdings, January 3, 2024 through December 22, 2025.</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>Net returns are **91.2%** for the classroom model and **78.2%** for the improved model, versus **45.5%** for equal-weight stocks and **49.4%** for SPY. Annualized Sharpe ratios are **1.34** and **1.04**, assuming a fixed 4.32% annual risk-free rate. Better average prediction accuracy did not produce a better portfolio: the strategy depends on ranking and weighting just ten stocks, while RMSE evaluates every forecast.</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Strategy <span class="pp">|</span> Net total return <span class="pp">|</span> Annualized Sharpe <span class="pp">|</span> Holding-boundary max drawdown <span class="pp">|</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>:--<span class="pp">|</span>--:<span class="pp">|</span>--:<span class="pp">|</span>--:<span class="pp">|</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Classroom model, purged <span class="pp">|</span> 91.2% <span class="pp">|</span> 1.34 <span class="pp">|</span> -10.0% <span class="pp">|</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Improved <span class="pp">|</span> 78.2% <span class="pp">|</span> 1.04 <span class="pp">|</span> -10.0% <span class="pp">|</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Equal-weight 95 stocks <span class="pp">|</span> 45.5% <span class="pp">|</span> 1.20 <span class="pp">|</span> -10.7% <span class="pp">|</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> SPY <span class="pp">|</span> 49.4% <span class="pp">|</span> 1.20 <span class="pp">|</span> -12.2% <span class="pp">|</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>::: {.column-screen-inset}</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="al">![Growth of $1 after assumed trading costs, using identical execution dates.](results/figures/02_wealth.png)</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>::: {.column-screen-inset}</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="al">![Drawdowns measured at holding boundaries; losses between boundaries can be deeper.](results/figures/03_drawdown.png)</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## Takeaway</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>Unexpected news, competition and changing relationships make returns difficult to forecast. The broad input universe does not guarantee a diversified top-ten portfolio; sector and position concentration require the actual holdings. Without simulator trade records, I cannot attribute our classroom loss to technology exposure or an AI-related shock.</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>This retrospective test uses a fixed list of surviving companies and only 26 investment periods. Historical adjustments and assumed closing-price execution also limit realism. The more conservative model improves forecast error, but lowers realized return and Sharpe. Model complexity, forecast accuracy and investment usefulness are different questions—and each needs its own benchmark.</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data and reproducibility</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>Prices: <span class="co">[</span><span class="ot">Yahoo Finance</span><span class="co">](https://finance.yahoo.com/quote/SPY/history/)</span>, retrieved November 16, 2026, archived for 2022-2025. Adjusted close reflects <span class="co">[</span><span class="ot">splits and dividends</span><span class="co">](https://in.help.yahoo.com/kb/adjusted-close-sln28256.html)</span>. See <span class="co">[</span><span class="ot">XGBoost parameters</span><span class="co">](https://xgboost.readthedocs.io/en/stable/parameter.html)</span>.</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>The original source is <span class="in">`original/instructor_broad_universe_xgboost.R`</span>, confirmed as the script used for our simulator project. <span class="in">`R_Crash_Course_Assignment.pdf`</span> specifies the project design. The earlier five-stock adaptation is retained only as background and is not used for these results. The 113-team example in the assignment describes a previous semester; the supplied workbook contains 45 teams.</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Download the complete replication project</span><span class="co">](replication.zip)</span>, <span class="co">[</span><span class="ot">README</span><span class="co">](README.txt)</span>, <span class="co">[</span><span class="ot">analysis code</span><span class="co">](code/analyze.R)</span>, <span class="co">[</span><span class="ot">forecast results</span><span class="co">](results/prediction_metrics.csv)</span>, <span class="co">[</span><span class="ot">investment results</span><span class="co">](results/investment_metrics.csv)</span>, or <span class="co">[</span><span class="ot">portfolio holdings</span><span class="co">](results/weights.csv)</span>. Source: <span class="co">[</span><span class="ot">my website repository</span><span class="co">](https://github.com/sijiexu-jennifer/jenniferxu-website)</span>.</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> code/analyze.R</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> code/classroom.R</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> code/publish.R</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>No new download is needed. <span class="in">`publish.R`</span> generates this Quarto source from saved results; render it in the existing website to retain its established styling. Holdings and entry/exit dates are saved. Sharpe annualization uses 252/19 periods per year; drawdown is sampled at holding ends. Initial and final costs are charged to every strategy. No formal significance or causal-alpha claim is made.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="https://sijiexu-jennifer.github.io/jenniferxu-website/images/UniversityofPennsylvania_FullLogo_RGB.jpeg" class="img-fluid" width="100"></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Jennifer Xu</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

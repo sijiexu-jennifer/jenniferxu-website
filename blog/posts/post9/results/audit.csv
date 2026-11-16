@@ -1,0 +1,8 @@
+item,value
+universe_size,95
+train_rows,33725
+test_rows,45790
+train_last_label,2023-12-29
+test_first_signal,2024-01-02
+test_last_signal,2025-12-02
+leaking_classroom_labels,1900
